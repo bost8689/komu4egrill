@@ -1,0 +1,366 @@
+<div id="smca-modal-body">
+  <script type="text/javascript" src="catalog/view/javascript/ocdev_smart_cart/ocdev_smart_cart.js"></script>
+  <div class="modal-heading">
+    {{ heading_title }}
+    <span class="modal-close" onclick="$.magnificPopup.close();"></span>
+  </div>
+  <div class="modal-body" id="check-data">
+    <div id="smca-modal-data">
+      {% if products %}
+        <!-- CART PRODUCTS -->
+        {% if error_stock %}
+        <div class="alert alert-danger">{{ error_stock }}
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endif %}
+
+        <div class="product-table-cart">
+          <div class="product-table-heading">
+            <div class="remove">{{ column_remove }}</div>
+            <div class="name">{{ column_name }}</div>
+            <div class="price">{{ column_price }}</div>
+            <div class="quantity">{{ column_quantity }}</div>
+            <div class="total">{{ column_total }}</div>
+          </div>
+          <div class="product-table-body" id="product-table-body">
+            {% for product in products %}
+              <div class="product-table-body-row">
+                <div class="remove">
+                  <input type="button" onclick="update_cart(this, 'remove');" title="{{ button_remove }}" />
+                  <input name="product_key" value="{{ product.key }}" style="display: none;" hidden />
+                  <input name="product_id_q" value="{{ product.product_id }}" style="display: none;" hidden />
+                </div>
+                <div class="name">
+                  {% if hide_main_img %}
+                  <div class="name-left">
+                    {% if product.thumb %}
+                      <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /></a>
+                    {% endif %}
+                  </div>
+                  {% endif %}
+                  <div class="name-right{% if not hide_main_img %}{{ ' fix' }}{% endif %}">
+                    <a href="{{ product.href }}" title="{{ product.name }}" {% if not product.stock %}{{ 'class="error-stock"' }}{% endif %} >{{ product.name }}</a>
+                    {% if product.model  and  hide_product_model %}<div class="model"><span>{{ text_model }}</span>{{ product.model }}</div>{% endif %}
+                    {% if product.ean  and  hide_product_ean %}<div class="ean"><span>{{ text_ean }}</span>{{ product.ean }}</div>{% endif %}
+                    {% if product.jan  and  hide_product_jan %}<div class="jan"><span>{{ text_jan }}</span>{{ product.jan }}</div>{% endif %}
+                    {% if product.isbn  and  hide_product_isbn %}<div class="isbn"><span>{{ text_isbn }}</span>{{ product.isbn }}</div>{% endif %}
+                    {% if product.mpn  and  hide_product_mpn %}<div class="mpn"><span>{{ text_mpn }}</span>{{ product.mpn }}</div>{% endif %}
+                    {% if product.location  and  hide_product_location %}<div class="location"><span>{{ text_location }}</span>{{ product.location }}</div>{% endif %}
+                    {% if product.stock_text  and  hide_product_stock %}<div class="stock-text"><span>{{ text_availability }}</span>{{ product.stock_text }}</div>{% endif %}
+                    {% if product.reward  and  hide_product_reward %}<div class="reward"><span>{{ text_points }}</span>{{ product.reward }}</div>{% endif %}
+                    {% if product.option  and  hide_product_option %}
+                      <div class="options">
+                        {% for option in product.option %}
+                        <span>{{ option.name }}: {{ option.value }}</span><br />
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="price">
+                  <div>{{ product.price }}</div>
+                  {% if product.tax  and  hide_product_tax %}<span>{{ text_tax }}<br/>{{ product.tax }}</span>{% endif %}
+                </div>
+                <div class="quantity">
+                  <div class="inner">
+                    <div>
+                      <input name="product_id_q" value="{{ product.product_id }}" style="display: none;" hidden />
+                      <input name="product_id" value="{{ product.key }}" style="display: none;" hidden />
+                      <button onclick="$(this).next().val(~~$(this).next().val()+1); update_cart(this, 'update');" id="increase-quantity">+</button>
+                      <input
+                        type="text"
+                        name="quantity"
+                        value="{{ product.quantity }}"
+                        onchange="update_cart(this, 'update'); return validate_input(this);"
+                        onkeyup="update_cart(this, 'update'); return validate_input(this);"
+                        class="input-quantity"
+                      />
+                      <button onclick="$(this).prev().val(~~$(this).prev().val()-1); update_cart(this, 'update');" id="decrease-quantity">&mdash;</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="total">
+                  <div>{{ product.total }}</div>
+                  {% if product.tax_total  and  hide_product_tax %}<span>{{ text_tax }}<br/>{{ product.tax_total }}</span>{% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {% if hide_coupon  or  hide_voucher  or  hide_reward  or  hide_shipping %}
+        <!-- GIFT -->
+        <div class="cart-gifts">
+          <div class="smca-gift-heading">{{ text_help_heading }}</div>
+          <div class="panel-group" id="smca-gift-accordion">
+            {% if hide_coupon  and  coupon %}
+            <div>
+              <div class="heading"><a href="#smca-collapse-coupon" class="accordion-toggle" data-toggle="collapse" data-parent="#smca-gift-accordion">{{ text_coupon_title }} <i class="fa fa-caret-down"></i></a></div>
+              <div class="collapse" id="smca-collapse-coupon">
+                <div class="section">{{ coupon }}</div>
+              </div>
+            </div>
+            {% endif %}
+            {% if hide_voucher  and  voucher %}
+            <div>
+              <div class="heading"><a href="#smca-collapse-voucher" class="accordion-toggle" data-toggle="collapse" data-parent="#smca-gift-accordion" >{{ text_voucher_title }} <i class="fa fa-caret-down"></i></a></div>
+              <div class="collapse" id="smca-collapse-voucher">
+                <div class="section">{{ voucher }}</div>
+              </div>
+            </div>
+            {% endif %}
+            {% if hide_reward  and  reward %}
+            <div>
+              <div class="heading"><a href="#smca-collapse-reward" class="accordion-toggle" data-toggle="collapse" data-parent="#smca-gift-accordion">{{ text_reward_title }} <i class="fa fa-caret-down"></i></a></div>
+              <div class="collapse" id="smca-collapse-reward">
+                <div class="section">{{ reward }}</div>
+              </div>
+            </div>
+            {% endif %}
+            {% if hide_shipping  and  shipping %}
+            <div>
+              <div class="heading"><a href="#smca-collapse-shipping" class="accordion-toggle" data-toggle="collapse" data-parent="#smca-gift-accordion">{{ text_shipping_title }} <i class="fa fa-caret-down"></i></a></div>
+              <div class="collapse" id="smca-collapse-shipping">
+                <div class="section">{{ shipping }}</div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- TOTALS -->
+        <div class="totals">
+          <div>
+            <span>{{ text_total_bottom }}</span>
+            <div id="total-order">{{ total }}{% if hide_cart_weight %}{{ ';' }}{% endif %}</div>
+            {% if hide_cart_weight %}
+            <span>{{ text_cart_weight }}</span>
+            <div id="weight-order">{{ cart_weight }}</div>
+            {% endif %}
+          </div>
+        </div>
+        <div id="save-cart-data">
+          <div>
+            <input type="button" onclick="$('#save-cart-data-for-email').slideToggle();"  value="{{ buttom_save_cart_to_email }}" class="save-cart-data-button{% if not customer_status %}{{ ' fix' }}{% endif %}" />
+            {% if customer_status %}
+              <input type="button" onclick="saveCart('wishlist');"  value="{{ buttom_save_cart_to_wishlist }}" class="save-cart-data-button" />
+            {% endif %}
+            <div id="save-cart-data-for-email">
+              <input type="text" name="save_cart_email" value="{{ save_cart_email }}" />
+              <input type="button" onclick="saveCart('email');" value="{{ button_send_cart }}" class="save-cart-data-for-email-button" />
+            </div>
+          </div>
+          <div id="save-cart-data-result-error"></div>
+          <div id="save-cart-data-result-success"></div>
+        </div>
+       {% else %}
+        <div id="smca-modal-data-empty">{{ text_empty }}</div>
+        {% endif %}
+    </div>
+
+    {% if check  and  check != 0  and  cross_sell_products %}
+    <!-- AJAX PRODUCTS -->
+    <div id="smca-ajax-products">
+      <div class="smca-ajax-products-arrow">
+        <button id="ajax-products-arrow-prev">{{ button_carousel_prev }}</button>
+        <input type="hidden" name="ajax_pagination" value="0" style="display:none;" />
+        <input type="hidden" name="ajax_all_products" value="{{ ajax_all_products }}" style="display:none;" />
+        <button id="ajax-products-arrow-next">{{ button_carousel_next }}</button>
+      </div>
+      <div id="smca-ajax-products-list">
+        {% for product in cross_sell_products %}
+          <div class="ajax-product">
+            {% if m_hide_sub_img %}
+            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /></a></div>
+            {% endif %}
+            <div class="name"><a href="{{ product.href }}">{{ product.name }}</a></div>
+            {% if product.price  and  m_hide_product_price %}
+            <div class="price">
+              {% if not product.special %}
+              <span class="price-new">{{ product.price }}</span>
+              {% else %}
+              <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+              {% endif %}
+            </div>
+            {% endif %}
+            {% if m_hide_product_addto_cart_button %}
+            <div class="cart"><a onclick="update_cart({{ product.product_id }}, 'add');">{{ button_cart }}</a></div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %} 
+  </div>
+  <!-- BUTTONS -->
+  <div class="modal-footer">
+    <input type="button" onclick="$.magnificPopup.close();" value="{{ button_go_back }}" class="close-button-bottom" />
+    {% if products %}
+      {% if hide_save_cart_button %}
+      <input type="button" onclick="$('#save-cart-data').slideToggle();" value="{{ button_save_cart }}" class="save-button-bottom" />
+      {% endif %}
+      <input type="button" onclick="location.href='{{ checkout_link }}';" value="{{ button_go_to_checkout }}" class="go-button-bottom" />
+    {% endif %}
+  </div>
+
+  <script type="text/javascript">
+  function update_cart(target, status) {
+    maskElement('#check-data', true);
+    var input_val    = $(target).parent().children('input[name=quantity]').val(),
+        quantity     = parseInt(input_val),
+        product_id   = $(target).parent().children('input[name=product_id]').val(),
+        product_id_q = $(target).parent().children('input[name=product_id_q]').val(),
+        product_key  = $(target).next().val(),
+        urls         = null;
+
+    if (quantity == 0 || (isNaN(quantity)&&status=='update')) {
+      quantity = $(target).parent().children('input[name=quantity]').val(1);
+      maskElement('#check-data', false);
+      return;
+    }
+
+    if (status == 'update') {
+      urls = 'index.php?route=extension/module/ocdev_smart_cart&update=' + product_id + '&quantity=' + quantity;
+    } else if (status == 'add') {
+      urls = 'index.php?route=extension/module/ocdev_smart_cart&add=' + target + '&quantity=1';
+    } else {
+      urls = 'index.php?route=extension/module/ocdev_smart_cart&remove=' + product_key;
+    }
+
+    $.ajax({
+      url: urls,
+      type: 'get',
+      dataType: 'html',
+      cache: false,
+      success: function(data) {
+        $('#smca-modal-data').html($(data).find('#smca-modal-data').children());
+        $('#smca-ajax-products').html($(data).find('#smca-ajax-products > *'));
+        maskElement('#check-data', false);
+        buttonManipulate();
+        $('[onclick="getOCwizardModal_smca(\'' +  parseInt(product_id_q) + '\',\'' + 'load' + '\');"]')
+        .html('<i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span>')
+        .attr('onclick', 'getOCwizardModal_smca(\'' + parseInt(product_id_q) + '\',\'' + 'add' + '\');');
+
+        $('[onclick="getOCwizardModal_smca(\'' + parseInt(product_id_q) + '\',\'' + 'load_option' + '\');"]')
+        .html('{{ button_cart }}')
+        .attr('onclick', 'getOCwizardModal_smca(\'' + parseInt(product_id_q) + '\',\'' + 'add_option' + '\');');
+
+        $('[onclick="getOCwizardModal_smca(\'' + parseInt(product_id_q) + '\',\'' + 'add_option' + '\');"]')
+        .html('{{ button_cart }}')
+        .attr('onclick', 'getOCwizardModal_smca(\'' + parseInt(product_id_q) + '\',\'' + 'add_option' + '\');');
+      }
+    });
+  }
+
+  $(document).on('click', '#ajax-products-arrow-prev', function() {
+    maskElement('#smca-ajax-products-list > .ajax-product', true);
+    $(this).next().val(~~$(this).next().val() - 3);
+    ajaxProducts(this);
+  });
+
+  $(document).on('click', '#ajax-products-arrow-next', function() {
+    maskElement('#smca-ajax-products-list > .ajax-product', true);
+    var count_div = $('#smca-ajax-products-list > .ajax-product').length,
+        current_part = parseInt($('#smca-ajax-products input[name=ajax_pagination]').val()),
+        all_products = parseInt($('#smca-ajax-products input[name=ajax_all_products]').val());
+
+    if (count_div < 3) {
+      $(this).css({ 'opacity': 0.5, 'cursor' : 'default' }).unbind('onclick');
+      maskElement('#smca-ajax-products-list > .ajax-product', false);
+      return;
+    } else if (current_part+3 >= all_products) {
+      $(this).css({ 'opacity': 0.5, 'cursor' : 'default' }).unbind('onclick');
+      maskElement('#smca-ajax-products-list > .ajax-product', false);
+      return;
+    } else {
+      $(this).prev().prev().val(~~$(this).prev().prev().val() + 3);
+    }
+
+    ajaxProducts(this);
+  });
+
+  function ajaxProducts(target) {
+    var input_val  = $(target).parent().children('input[name=ajax_pagination]').val(),
+        quantity   = parseInt(input_val),
+        count_ajax_products = $(target).parent().children('input[name=ajax_all_products]').val();
+
+    $('.smca-ajax-products-arrow button').css({ 'opacity': 1, 'cursor' : 'pointer' });
+
+    if (quantity <= -3) {
+      $('#ajax-products-arrow-prev').css({ 'opacity': 0.5, 'cursor' : 'default' });
+      quantity = $(target).parent().children('input[name=ajax_pagination]').val(0);
+      maskElement('#smca-ajax-products-list > .ajax-product', false);
+      return;
+    }
+
+    if (quantity >= $('#smca-ajax-products input[name=ajax_all_products]').val()) {
+      $('#ajax-products-arrow-next').css({ 'opacity': 0.5, 'cursor' : 'default' });
+      quantity = $(target).parent().children('input[name=ajax_pagination]').val($('#smca-ajax-products input[name=ajax_all_products]').val());
+      maskElement('#smca-ajax-products-list > .ajax-product', false);
+      return;
+    }
+
+    if (quantity > count_ajax_products) {
+      $.ajax({
+        url:  'index.php?route=extension/module/ocdev_smart_cart&start=0' + '&end=3',
+        type: 'get',
+        dataType: 'html',
+        cache: false,
+        success: function(data) {
+          $(target).parent().children('input[name=ajax_pagination]').val(0);
+          $('#smca-ajax-products-list').html($(data).find('#smca-ajax-products-list > *'));
+        }
+      });
+    } else {
+      $.ajax({
+        url:  'index.php?route=extension/module/ocdev_smart_cart&start=' + quantity + '&end=3',
+        type: 'get',
+        dataType: 'html',
+        cache: false,
+        success: function(data) {
+          $('#smca-ajax-products-list').html($(data).find('#smca-ajax-products-list > *'));
+        }
+      });
+    }
+  }
+  // loadmask function
+  function maskElement(element, status) {
+    if (status == true) {
+      $('<div/>')
+      .attr('class', 'smca-modal-loadmask')
+      .prependTo(element);
+      $('<div class="smca-modal-loadmask-loading" />').insertAfter($('.smca-modal-loadmask'));
+    } else {
+      $('.smca-modal-loadmask').remove();
+      $('.smca-modal-loadmask-loading').remove();
+    }
+  }
+
+  function validate_input(input) {
+    input.value = input.value.replace(/[^\d,]/g, '');
+  }
+
+  function saveCart(type) {
+    maskElement('#check-data', true);
+    $.ajax({
+      type: 'post',
+      url:  'index.php?route=extension/module/ocdev_smart_cart/saveCart&type=' + type,
+      data: $('#save-cart-data input[type=\'text\']'),
+      dataType: 'json',
+      cache: false,
+      success: function(json) {
+        if (json['error']) {
+          maskElement('#check-data', false);
+          $('#save-cart-data-result-error').fadeIn().html(json['error']).delay(2000).fadeOut();
+        }
+        if (json['success']) {
+          maskElement('#check-data', false);
+          $('#save-cart-data-result-success').fadeIn().html(json['success']).delay(2000).fadeOut();
+          $('#wishlist-total').html(json['total']);
+        }
+      }
+    });
+  }
+  </script>
+</div>

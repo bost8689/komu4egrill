@@ -1,0 +1,32 @@
+<input type="text" name="smca_reward" value="{{ reward }}" placeholder="{{ entry_reward }}" id="smca-input-reward" />
+<input type="submit" value="{{ button_reward }}" id="smca-button-reward" data-loading-text="{{ text_loading }}"  class="next-step-button" />
+<script type="text/javascript"><!--
+	$('#smca-button-reward').on('click', function() {
+		$.ajax({
+			url: 'index.php?route=extension/module/ocdev_smart_cart/reward',
+			type: 'post',
+			data: 'smca_reward=' + encodeURIComponent($('input[name=\'smca_reward\']').val()),
+			dataType: 'json',
+			cache: false,
+			beforeSend: function() {
+				$('#smca-button-reward').button('loading');
+			},
+			complete: function() {
+				$('#smca-button-reward').button('reset');
+			},
+			success: function(json) {
+				$('.field-error').remove();
+				if (json['error']) {
+					maskElement('#check-data', false);
+					$('input[name=\'smca_reward\']').addClass('error-style').after('<span class="error-text field-error">' + json['error'] + '</span>');
+				} else {
+					maskElement('#check-data', false);
+					$('input[name=\'smca_reward\']').removeClass('error-style').after('<span id="smca-reward-success">' + json['success'] + '</span>').fadeIn();
+					$('#smca-reward-success').delay(1000).fadeOut();
+					setTimeout(update_cart, 1000, 1, 'remove');
+				}
+			}
+		});
+	});
+//-->
+</script>

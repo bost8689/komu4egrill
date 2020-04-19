@@ -1,0 +1,10 @@
+.htaccess.txt
+.htaccess
+admin/
+image/
+system/
+php.ini
+robots.txt
+index.php
+connect.php
+config.php
