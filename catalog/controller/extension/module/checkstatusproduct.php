@@ -98,7 +98,7 @@ class ControllerExtensionModuleCheckstatusproduct extends Controller {
         $getPosterStatusOrder = $this->model_extension_module_checkstatusproduct->setStatusOrder(['poster_transaction_id'=>$transaction_id,'id'=>$vStatusOrder['id']]);        
         //получаю чек по транзакции
         $url = 'https://joinposter.com/api/dash.getTransaction'
-       . '?token='.joinposter_token
+       . '?token='.JOINPOSTER_TOKEN
        . '&transaction_id='.$transaction_id
        . '&include_history=false'
        . '&include_products=true';
