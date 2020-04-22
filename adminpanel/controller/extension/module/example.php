@@ -166,6 +166,18 @@ class ControllerExtensionModuleExample extends Controller {
             $data['posterProducts'][$k_poster_product]['menu_category_id']=$v_poster_product->menu_category_id;
 
             foreach ($products_im as $k_products_im => $v_products_im) {
+                
+                // if($data['posterProducts'][$k_poster_product]['product_id']==74 && $v_products_im['product_id']==81){
+                //     $log->write($v_products_im['name']);
+                //     $log->write($data['posterProducts'][$k_poster_product]['product_name']);
+                //     $log->write(mb_strtolower($v_products_im['name']),mb_strtolower($data['posterProducts'][$k_poster_product]['product_name']));
+                //     $log->write(mb_strtolower($data['posterProducts'][$k_poster_product]['product_name']));
+                //      if (mb_strtolower($v_products_im['name'])==mb_strtolower($data['posterProducts'][$k_poster_product]['product_name'])){
+                //         $log->write('РАВНЫ'); 
+                //      }
+                    
+                // }
+                
                 if (mb_strtolower($v_products_im['name'])==mb_strtolower($data['posterProducts'][$k_poster_product]['product_name'])){
                     $data['posterAndImProducts'][$v_products_im['product_id']]=['name'=>$v_products_im['name'],'im_product_id'=>$v_products_im['product_id'],'poster_product_id'=>$data['posterProducts'][$k_poster_product]['product_id']];
                     //записываем в базу данных
