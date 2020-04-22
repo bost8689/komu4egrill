@@ -1,0 +1,113 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+
+      <!-- Кнопки управления -->
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+
+      <!-- Название модуля -->
+      <h1>{{ heading_title }}</h1>
+
+      <!-- Хлебные крошки -->
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+          <!-- Настройка: "Статус" -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="module_example_status" id="input-status" class="form-control">
+                {% if module_example_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+        </form>
+
+        <div class="panel panel-default">
+        
+        {% if error %}
+        <h1>{{error}}</h1>  
+        {% endif %}
+        <table class="table">
+        <tr>
+        <td class="active" style="vertical-align: top">
+        
+        {% if getOrder.order_id %}
+          {% for kOrder,vOrder in getOrder %}
+              <li>{{kOrder}} {{vOrder}}</li>
+          {% endfor %}    
+        {% else %}
+        <strong>Заказ не найден</strong></br>
+        {% endif %}
+
+        {% if getOrderProducts %}
+          <strong>Данные заказа</strong>
+          {% for kOrderProducts, vOrderProducts in getOrderProducts %}
+              {% for key, value in vOrderProducts %}
+                  <li>{{kOrderProducts}} {{key}} {{value}}</li>
+              {% endfor %}        
+          {% endfor %}    
+        {% else %}
+          <strong>Данных заказ нет</strong>
+        {% endif %}
+        </td>
+        <td class="active" style="vertical-align: top">
+        <strong>Кол-во новых записанных товаров {{count_write_poduct_db}}</strong>
+        <strong>Сопоставление продуктов <br></strong>
+        <strong>Всего продуктов в ИМ {{totalProductsIM}} <br></strong>
+        <strong>Кол-во сопосталвенных {{countPosterAndImProducts}} <br></strong>
+        {% for kPosterAndImProducts,vPosterAndImProducts in posterAndImProducts %}
+             <li>{{ loop.index }} {{vPosterAndImProducts.name}} id товара в ИМ-{{kPosterAndImProducts}}  id в постере - {{vPosterAndImProducts.poster_product_id}}</li>
+        {% endfor %}
+
+        <strong>Не нашли сопостовление продуктов ИМ</strong>
+        {% for notCompareImProduct in notCompareImProducts %}
+             <li>{{ loop.index }} {{notCompareImProduct.name}} {{notCompareImProduct.id_product_im}} </li>
+        {% endfor %}
+
+        <strong>Не нашли сопостовление Poster</strong>
+        {% for notComparePosterProduct in notComparePosterProducts %}
+             <li>{{ loop.index }} {{notComparePosterProduct.name}} {{notComparePosterProduct.poster_product_id}}</li>
+        {% endfor %}
+
+        </td>
+
+        
+        <td class="active" style="vertical-align: top">
+        <strong>Полный список продуктов в Poster </strong>      
+        {% for posterProduct in posterProducts %}
+            <li>{{ loop.index }} id{{posterProduct.product_id}} {{posterProduct.product_name}} {{posterProduct.visible}}</li>
+        {% endfor %}
+        </td>
+        
+        </tr>  
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

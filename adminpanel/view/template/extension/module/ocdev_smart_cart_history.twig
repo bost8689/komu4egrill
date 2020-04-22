@@ -1,0 +1,103 @@
+{% if histories %}
+  <div class="btn-group">
+    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <i class="fa fa-trash-o"></i> {{ button_delete_menu }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a onclick="delete_all();">{{ button_delete_all }}</a></li>
+      <li><a onclick="delete_all_selected();">{{ button_delete_selected }}</a></li>
+    </ul>
+  </div>
+  <div class="special_margin"></div>
+{% endif %}
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').attr('checked', this.checked);" /></td>
+        <td class="text-left">{{ column_cart_visitor_info }}</td>
+        <td class="text-left">{{ column_cart_products_in_cart }}</td>
+        <td class="text-left">{{ column_cart_date_time }}</td>
+        <td class="text-center">{{ column_cart_action }}</td>
+      </tr>
+    </thead>
+    <tbody>
+    {% if histories %}
+      {% for history in histories %}
+      <tr>
+        <td style="text-align: center;"><input type="checkbox" name="selected[]" value="{{ history.cart_id }}" /></td>
+        <td class="text-left">
+          <p><strong>{{ text_email }}</strong> {{ history.email }}</p>
+          <p><strong>{{ text_ip }}</strong> {{ history.ip }} <button onclick="window.open('http://www.checkip.com/ip/{{ history.ip }}','_blank');return false;" class="btn btn-default btn-xs" data-toggle="tooltip" title="{{ button_check_ip }}" data-placement="right"><i class="fa fa-info-circle"></i> {{ text_check }}</button></p>
+        </td>
+        <td>
+          <button type="button" id="button-call-modal-{{ history.cart_id }}" class="btn btn-primary btn-sm" data-loading-text="Loading..." onclick="button_loading({{ history.cart_id }});" data-toggle="modal" data-target="#madal-products-{{ history.cart_id }}" autocomplete="off">{{ button_view_products }} ({{ history.products|length }})</button>
+          <!-- Modal -->
+          <div class="modal fade" id="madal-products-{{ history.cart_id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">{{ text_saved_cart_heading }}</h4>
+                </div>
+                <div class="modal-body">
+                  {% if history.products %}
+                  <div class="table-responsive">
+                    <table class="table table-bordered" style="margin-bottom:0">
+                      <thead>
+                        <tr>
+                          <td class="text-center">{{ column_product_id }}</td>
+                          <td class="text-center">{{ column_product_image }}</td>
+                          <td class="text-left">{{ column_product_name }}</td>
+                          <td class="text-left">{{ column_product_quantity }}</td>
+                          <td class="text-left">{{ column_product_total }}</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for product in history.products %}
+                        <tr>
+                          <td class="text-center">{{ product.product_id }}</td>
+                          <td class="text-center"><img src="{{ product.image }}" alt="{{ product.name }}" title="{{ product.name }}" /></td>
+                          <td class="text-left">
+                            <strong><a href="{{ product.href }}" target="blanck">{{ product.name }}</a></strong>
+                            {% if product.options %}
+                              <div class="options">
+                                {% for option in product.options %}
+                                  - {{ option.name }}: {{ option.value}}</br>
+                                {% endfor %}
+                              </div>
+                            {% endif %}
+                          </td>
+                          <td class="text-left">x {{ product.quantity }}</td>
+                          <td class="text-left">{{ product.total }}</td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="text-left">
+          {{ history.date_added }}
+        </td>
+        <td class="text-center">
+          <a onclick="confirm('Действительно удалить?') ? delete_selected('{{ history.cart_id }}') : false;" data-toggle="tooltip" title="" class="btn btn-warning" data-original-title="{{ button_delete }}"><i class="fa fa-trash-o"></i></a>
+        </td>
+      </tr>
+      {% endfor %}
+       {% else %}
+        <tr>
+          <td class="text-center" colspan="5">{{ text_no_results }}</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-sm-6 text-left">{{ pagination }}</div>
+  <div class="col-sm-6 text-right">{{ results }}</div>
+</div>

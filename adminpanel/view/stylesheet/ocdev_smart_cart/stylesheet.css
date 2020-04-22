@@ -1,0 +1,45 @@
+.fix_bacground_opacity {
+  float: left;
+  width: 7%;
+  margin: 0 7px;
+  text-align: center;
+  height: 30px !important;
+}
+.fa-minus-circle {
+  cursor: pointer;
+}
+input + .background_for_label {
+  width: 55px;
+  height: 55px;
+  border: 1px solid #000;
+  margin: 0 7px 0 0;
+  opacity: 0.7;
+}
+.div_background_images input {
+  display: none;
+}
+input:checked + .background_for_label  {
+  border: 1px solid #F00;
+  opacity: 1;
+}
+.special_margin {
+  height: 7px;
+}
+.special_margin_lg {
+  height: 14px;
+}
+#promo-block .thumbnail {
+  cursor: pointer;
+}
+#smas_modal .panel-default {
+  border-top: 1px solid #E8E8E8;
+}
+.table-responsive table.table tr td p:last-child {
+  margin-bottom: 0;
+}
+#history .dropdown-menu > li > a {
+  cursor: pointer;
+}
+#content .well {
+  margin-bottom: 7px;
+}
