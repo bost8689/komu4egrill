@@ -234,7 +234,7 @@ class ControllerExtensionQuickCheckoutGuest extends Controller {
 			$telephone = $this->config->get('quickcheckout_field_telephone');
 
 			if (!empty($telephone['required'])) {
-				if ((utf8_strlen($this->request->post['telephone']) < 10) || (utf8_strlen($this->request->post['telephone']) > 11)) {
+				if ((utf8_strlen($this->request->post['telephone']) < 11) || (utf8_strlen($this->request->post['telephone']) > 11)) {
 					$json['error']['telephone'] = $this->language->get('error_telephone2');
 				}
 			}
