@@ -14,7 +14,7 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h3>Здесь отображается актуальный статус вашего заказа"</h3>
+      <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени."</h3>
 
 
       <h2>Заказ #<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #}</h2>
@@ -25,9 +25,6 @@
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
       Нажми! 
       </button> #}
-
-
-
 
       
       {% if debug_mode %}
@@ -101,18 +98,18 @@
         'order_id': order_id,          
       },
       complete: function(data) {
-        console.log("complete " + new Date().toLocaleTimeString()+'-'+performance.now());          
+        //console.log("complete " + new Date().toLocaleTimeString()+'-'+performance.now());          
       },
       beforeSend: function() {
-        console.log('beforeSend ' + new Date().toLocaleTimeString()+'-'+performance.now());
+        //console.log('beforeSend ' + new Date().toLocaleTimeString()+'-'+performance.now());
       },
       success: function(response) { 
-        console.log("success " + new Date().toLocaleTimeString()+'-'+performance.now());
+        //console.log("success " + new Date().toLocaleTimeString()+'-'+performance.now());
         //console.log(performance.now());
         if (document.getElementById('PosterStatusOrderText').innerHTML != response['status']) {
           document.getElementById('PosterStatusOrderText').innerHTML = response['status'];
           document.getElementById('myModalBody').innerHTML = response['status'];
-          console.log(response['status']);
+          //console.log(response['status']);
           $('#myModal').modal('show')
         } 
         
@@ -130,7 +127,7 @@
       });//ajax
   }, 5000)
   //console.log('появилось окно' + new Date().toLocaleTimeString());
-  console.log("конец скрипта " + new Date().toLocaleTimeString()+'-'+performance.now());
+  //console.log("конец скрипта " + new Date().toLocaleTimeString()+'-'+performance.now());
 
 </script>
 

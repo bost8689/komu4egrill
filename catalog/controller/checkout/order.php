@@ -5,7 +5,7 @@ class ControllerCheckoutOrder extends Controller {
 		$data['debug_mode']=false;
 		$this->load->language('checkout/success');	
 		$this->log = New Log('order_'.date("d.m.y").'.txt');				
-	  $this->log -> write('Запуск Order');
+	    $this->log -> write('Запуск Order');
 
   	
 	  
@@ -179,8 +179,11 @@ class ControllerCheckoutOrder extends Controller {
 
 		    $this->load->model('extension/module/checkstatusproduct');
 		    //$data['getPosterStatusOrder'] = $this->model_extension_module_checkstatusproduct->getPosterStatusOrder(['im_order_id'=>$data['order_id']]);
-		    $getPosterStatusOrder = $this->model_extension_module_checkstatusproduct->getPosterStatusOrder(['im_order_id'=>38]);
-		    $data['getPosterStatusOrder']=$getPosterStatusOrder[0];		
+		    $getPosterStatusOrder = $this->model_extension_module_checkstatusproduct->getPosterStatusOrder(["im_order_id"=>$data['order_id']]);
+		    $data['getPosterStatusOrder']=$getPosterStatusOrder[0];	
+		  //  $this->log -> write('получил $getPosterStatusOrder[0]');
+		  //  $this->log -> write($getPosterStatusOrder[0]);
+		  //  return;
 		    if (!empty($data['getPosterStatusOrder'])) {
 		    	$this->log -> write($data['getPosterStatusOrder']);
 		    	if($data['getPosterStatusOrder']['poster_status_order']=="cancell"){
@@ -200,17 +203,17 @@ class ControllerCheckoutOrder extends Controller {
 		    	elseif($data['getPosterStatusOrder']['poster_status_order']=="ready"){ 
 		    		//статус заказ готов
 			      if ($getOrder['shipping_method']=='Самовывоз из заведения') {
-			      	$data['PosterStatusOrderText']="готов, можете его забирать по адресу ТК Пионерный";
+			      	$data['PosterStatusOrderText']="ваш заказ готов, можете его забирать по адресу ТК Пионерный";
 			      	$data['PosterStatusOrder']="ready_sam";
 			        $this->log -> write("готов, можете его забирать по адресу ТК Пионерный");
 			      }
 			      elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 1000 руб.'){
-			      	$data['PosterStatusOrderText']="ваш заказ отправлен курьером";
+			      	$data['PosterStatusOrderText']="ваш заказ отправлен курьером. ожидайте доставки";
 			      	$data['PosterStatusOrder']="ready_dostavka";
 			         $this->log -> write("ваш заказ отправлен курьером");   
 			      }
 			      elseif($getOrder['shipping_method']=='Бесплатная доставка'){
-			      	$data['PosterStatusOrderText']="ваш заказ отправлен курьером";
+			      	$data['PosterStatusOrderText']="ваш заказ отправлен курьером. ожидайте доставки";
 			      	$data['PosterStatusOrder']="ready_dostavka";
 			        $this->log -> write("ваш заказ отправлен курьером");
 			      }
@@ -221,11 +224,12 @@ class ControllerCheckoutOrder extends Controller {
 			  //если это запрос от ajax
 		 
 		  if (isset($this->request->post['order_id'])) {
-		  	$this->ajax();
+		  	//$this->ajax();
 		  	$data['order_id']=$this->request->post['order_id'];
 	  		// $this->log -> write('запрос от Ajax');
 	  		// $this->log -> write($this->request->post);
 	  		$json = array();
+	  		$this->log -> write($data['PosterStatusOrderText']);
 	  		if(isset($data['PosterStatusOrderText'])){
 	  			$json['status'] = $data['PosterStatusOrderText'];		
 					
@@ -235,9 +239,9 @@ class ControllerCheckoutOrder extends Controller {
 	  		}	
 	  		//проверяю статус
 		  	$this->response->addHeader('Content-Type: application/json');
-				$this->response->setOutput(json_encode($json)); 
+			$this->response->setOutput(json_encode($json)); 
 
-				return;				
+			return;				
 	  	}	
 	  	else{ // get
 	  		// $addStatusPoduct = $this->model_extension_module_checkstatusproduct->addStatusProduct(['im_order_id'=>55,'poster_order_id'=>66,'poster_transaction_id'=>0,'poster_status_order'=>'not_ready','status_sms'=>'not_send']);
