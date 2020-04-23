@@ -229,8 +229,9 @@ class ControllerCheckoutOrder extends Controller {
 	  		// $this->log -> write('запрос от Ajax');
 	  		// $this->log -> write($this->request->post);
 	  		$json = array();
-	  		$this->log -> write($data['PosterStatusOrderText']);
+	  		
 	  		if(isset($data['PosterStatusOrderText'])){
+	  		    $this->log -> write($data['PosterStatusOrderText']);
 	  			$json['status'] = $data['PosterStatusOrderText'];		
 					
 	  		}
