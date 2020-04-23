@@ -55,6 +55,7 @@ class ControllerCheckoutSuccess extends Controller {
 		    $Order = $this->load->model('checkout/order');
 		    $getOrder = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 		    $getOrderProducts = $this->model_checkout_order->getOrderProducts($this->session->data['order_id']);
+		    $data['order_id']=$this->session->data['order_id'];
 
 		    //заказ
 		    $data['getOrder'] = ['order_id'=>$getOrder['order_id'],'firstname'=>$getOrder['firstname'],'telephone'=> $getOrder['telephone'],'invoice_prefix'=>$getOrder['invoice_prefix'],'payment_address_1'=>$getOrder['payment_address_1'],'payment_address_2'=>$getOrder['payment_address_2'],'payment_method'=>$getOrder['payment_method'],'shipping_method'=>$getOrder['shipping_method'],'total'=>$getOrder['total']];
@@ -120,9 +121,10 @@ class ControllerCheckoutSuccess extends Controller {
                 $log_poster->write($incoming_order);
                 
                 //добавляю новый статус продукт
-                $data_incoming_order = $this->sendRequest($url, 'post', $incoming_order); 
-                $log_poster->write($data_incoming_order); 
+                $data_incoming_order = $this->sendRequest($url, 'post', $incoming_order);
                 $data_decode = json_decode($data_incoming_order);
+                $log_poster->write($data_incoming_order); 
+                
      
                 if (isset($data_decode->error)) {
                     //пришла ошибка
@@ -192,6 +194,8 @@ class ControllerCheckoutSuccess extends Controller {
 		  $data['footer'] = $this->load->controller('common/footer');
 		  $data['header'] = $this->load->controller('common/header');
 
-		  $this->response->setOutput($this->load->view('common/success', $data));
+		  //$this->response->setOutput($this->load->view('common/success', $data));
+		  $this->response->redirect($this->url->link('checkout/order', "order=".$data['order_id']));
+		 
 	 }
 }

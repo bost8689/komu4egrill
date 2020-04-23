@@ -1,0 +1,137 @@
+{{ header }}
+<div id="common-success" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h3>Здесь отображается актуальный статус вашего заказа"</h3>
+
+
+      <h2>Заказ #<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #}</h2>
+      <h3>Статус вашего заказа:</h3>
+      <h2><span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
+
+      {# <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      Нажми! 
+      </button> #}
+
+
+
+
+      
+      {% if debug_mode %}
+      Данные вашего заказа
+      {% for kOrder,vOrder in getOrder %}
+        <li>{{kOrder}} {{vOrder}}</li>
+      {% endfor %}
+
+      статус заказа
+      {% for kStatusOrders,vStatusOrders in getPosterStatusOrder %}
+        <li>{{kStatusOrders}} {{vStatusOrders}}</li>
+      {% endfor %}
+      
+
+      {% endif%}
+      <br>
+
+
+      
+      {# <div class="buttons"> 
+        <div class="pull-right"><a href="{{ update_link }}" class="btn btn-primary">Обновить статус</a></div>
+      </div> #}
+       <div class="buttons">
+      <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div> 
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Изменился статус заказа</h4>
+            </div>
+            <div class="modal-body" id="myModalBody">
+             Вот оно!! оооооо
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+            </div>
+          </div>
+        </div>
+
+
+
+      {{ content_bottom }}</div>
+      {{ column_right }}</div>
+      </div>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  });  
+
+  let order_id = document.getElementById('order_id').innerHTML;
+  console.log(order_id); 
+  console.log('ура'); // Возвращаемые данные выводим в консоль
+
+  setInterval(function() {
+    //console.log(new Date().toLocaleTimeString());  
+  }, 1000)
+
+  setInterval(function() {
+    $.ajax({
+      url: 'index.php?route=checkout/order',
+      type: "post",
+      dataType: 'json',
+      async: true,
+      data: {
+        'order_id': order_id,          
+      },
+      complete: function(data) {
+        console.log("complete " + new Date().toLocaleTimeString()+'-'+performance.now());          
+      },
+      beforeSend: function() {
+        console.log('beforeSend ' + new Date().toLocaleTimeString()+'-'+performance.now());
+      },
+      success: function(response) { 
+        console.log("success " + new Date().toLocaleTimeString()+'-'+performance.now());
+        //console.log(performance.now());
+        if (document.getElementById('PosterStatusOrderText').innerHTML != response['status']) {
+          document.getElementById('PosterStatusOrderText').innerHTML = response['status'];
+          document.getElementById('myModalBody').innerHTML = response['status'];
+          console.log(response['status']);
+          $('#myModal').modal('show')
+        } 
+        
+                     
+        
+        
+        //цикл
+        //document.body.className = 'modal-open';
+        //document.getElementById('myModal').className = 'modal fade in';        
+        //console.log(document.getElementById('myModal').style = `display: block; padding-right: 17px;`);                  
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);     
+      }
+      });//ajax
+  }, 5000)
+  //console.log('появилось окно' + new Date().toLocaleTimeString());
+  console.log("конец скрипта " + new Date().toLocaleTimeString()+'-'+performance.now());
+
+</script>
+
+{{ footer }}
