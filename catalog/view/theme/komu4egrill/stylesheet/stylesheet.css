@@ -562,19 +562,41 @@ footer h5 {
 }
 .product-thumb .caption {
 	padding: 0px 0px 0px 5px;
-	min-height: 120px;
+	min-height: 0;
 	font-size: 13px;
 }
+.product-thumb .caption h3{
+	margin-top: 5px;
+    margin-bottom: 5px;    
+    color: #000000;
+    font-weight: bold;
+}	
 .product-list .product-thumb .caption {
 	margin-left: 230px;
 }
+
+
 @media (max-width: 1200px) {
 .product-grid .product-thumb .caption {
 	min-height: 120px;
 	padding: 0 10px;
 }
 }
+@media (min-width: 767px) {
+.product-thumb .caption{
+	min-height: 120px;
+}	
+}
 @media (max-width: 767px) {
+.product-thumb .caption h3{
+	margin-top: 5px;
+    margin-bottom: 5px;
+}	
+	
+.product-thumb .caption{
+
+	min-height: 0;
+}	
 .product-list .product-thumb .caption {
 	min-height: 0;
 	margin-left: 0;
@@ -606,7 +628,7 @@ h2.price {
 }
 .product-thumb .price {
 	/*color: #444;*/
-	color: #1f4e13;
+	color: #23a1d1;
     font-size: 22px;
     background-color: rgba(255,255,255,.15);
     border-radius: 20px;
