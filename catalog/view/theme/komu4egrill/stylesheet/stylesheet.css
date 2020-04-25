@@ -6,6 +6,7 @@ body {
 	line-height: 20px;
 	width: 100%;
 }
+
 h1, h2, h3, h4, h5, h6 {
 	color: #444;
 }
@@ -17,14 +18,45 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-size: 33px;
 }
+
 h2 {
 	font-size: 27px;
+}
+/*div#content #order_id h2{
+    color: green;
+}*/
+
+#content h2{
+	color: green;
+    /*color: green;*/
+    font-weight: bold;
 }
 h3 {
 	font-size: 18px;
 }
+#content h3{
+	/*color: green;*/
+    /*color: green;*/
+    font-weight: bold;
+}
+span#WarningText {
+	color: red;
+    /*color: green;*/
+    font-weight: bold;
+}
+
 h4 {
 	font-size: 15px;
+}
+h4#myModalLabel {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+div#myModalBody {
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
 }
 h5 {
 	font-size: 12px;
@@ -147,6 +179,15 @@ div.required .control-label:before {
 	line-height: 18px;
 	padding: 10px 35px;
 	text-shadow: 0 1px 0 #FFF;
+}
+.navbar-header {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    position: sticky;
+    top: 0;
+    min-height: 2em;
 }
 /* cart */
 #cart {
@@ -313,6 +354,14 @@ div.required .control-label:before {
 /* content */
 #content {
 	min-height: 600px;
+}
+/*#content h2 {
+    font-size: 18px;
+    color: green;
+}*/
+element.style {
+    color: green;
+    font-weight: 900;
 }
 /* footer */
 footer {

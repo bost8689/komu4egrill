@@ -14,12 +14,13 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени."</h3>
+      <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени.</h3>
 
 
-      <h2>Заказ #<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #}</h2>
+      <h2>Заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен</h2>
       <h3>Статус вашего заказа:</h3>
       <h2><span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
+      <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3>
 
       {# <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">

@@ -137,15 +137,15 @@ class ControllerCheckoutOrder extends Controller {
 				'href' => $this->url->link('common/home')
 		  );
 
-		  $data['breadcrumbs'][] = array(
-				'text' => $this->language->get('text_basket'),
-				'href' => $this->url->link('checkout/cart')
-		  );
+		  // $data['breadcrumbs'][] = array(
+				// 'text' => $this->language->get('text_basket'),
+				// 'href' => $this->url->link('checkout/cart')
+		  // );
 
-		  $data['breadcrumbs'][] = array(
-				'text' => $this->language->get('text_checkout'),
-				'href' => $this->url->link('checkout/checkout', '', true)
-		  );
+		  // $data['breadcrumbs'][] = array(
+				// 'text' => $this->language->get('text_checkout'),
+				// 'href' => $this->url->link('checkout/checkout', '', true)
+		  // );
 
 		  $data['breadcrumbs'][] = array(
 				'text' => 'Заказ №'.$data['order_id'],// $this->language->get('text_success')
