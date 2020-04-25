@@ -386,7 +386,7 @@ button.smca-call-button {
   position: relative;
   display: block;
   text-align: center;
-  padding: 20px;
+  padding: 0px;
   -moz-border-radius: 0 0 6px 6px;
   -webkit-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
@@ -991,6 +991,7 @@ button.smca-call-button {
 @media (min-width: 0px) and (max-width: 420px) {
   #smca-modal-body > .modal-footer > input {
     width: 100%;
+    height: 50px;
   }
 
 }

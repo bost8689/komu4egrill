@@ -832,3 +832,8 @@ h2.price {
     background-image: none;
     background-color: #df5c39;
 }
+@media (max-width: 767px){
+	.hidden-xs {
+	    display: inline;
+	}
+}
