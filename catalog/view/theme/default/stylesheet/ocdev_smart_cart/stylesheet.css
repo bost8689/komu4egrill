@@ -177,7 +177,7 @@ button.smca-call-button {
   width: 40%;
   text-align: left;
 }
-@media (max-width: 340px) and (min-width: 0px){
+@media (max-width: 415px) and (min-width: 0px){
   #smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .name > .name-left img{
   width: 60%;
 }
@@ -235,7 +235,7 @@ button.smca-call-button {
 }
 #smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .price,
 #smca-modal-body .modal-body .product-table-cart > .product-table-heading > div.price {
-  width: 10%;
+  width: 15%;
   /*text-align: left;*/
 }
 #smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .price > div,
