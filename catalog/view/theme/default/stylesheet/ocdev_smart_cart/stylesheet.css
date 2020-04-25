@@ -177,7 +177,7 @@ button.smca-call-button {
   width: 40%;
   text-align: left;
 }
-@media (max-width: 415px) and (min-width: 0px){
+@media (max-width: 544px) and (min-width: 0px){
   #smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .name > .name-left img{
   width: 60%;
 }
@@ -999,6 +999,11 @@ button.smca-call-button {
     /*display: none;*/
   }
 }
+@media (min-width: 0px) and (max-width: 540px) {
+#smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .name {
+    width: 25%;
+  }
+Ъ
 
 @media (min-width: 0px) and (max-width: 532px) {
   #smca-modal-body {
