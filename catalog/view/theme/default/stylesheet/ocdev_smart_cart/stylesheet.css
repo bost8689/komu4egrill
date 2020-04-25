@@ -994,16 +994,15 @@ button.smca-call-button {
   }
 
 }
-@media (min-width: 0px) and (max-width: 290px) {
-#smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .name > .name-left {
-    /*display: none;*/
-  }
-}
 @media (min-width: 0px) and (max-width: 540px) {
-#smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .name {
+#smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .name  {
+    /*display: none;*/
     width: 25%;
   }
-Ъ
+}
+#smca-modal-body .modal-body .product-table-cart > .product-table-body > .product-table-body-row > .name > .name-left {    
+}
+
 
 @media (min-width: 0px) and (max-width: 532px) {
   #smca-modal-body {
