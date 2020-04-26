@@ -30,11 +30,11 @@ table.quickcheckout-cart {
     padding: 0px;
 }
 .quickcheckout-content label {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 #quickcheckoutconfirm input {
-    font-size: 20px;
+    font-size: 16px;
     color: #0087ca;
     font-weight: bold;
 }
@@ -56,16 +56,16 @@ table.quickcheckout-cart {
     /* padding: 10px; */
 }
 #cart1 .quickcheckout-content {
-    font-size: 18px;
+    font-size: 16px;
 }
 div#cart1 p {
     color: green;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }
 .quickcheckout-heading {
     background: #d6d6d6;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 /*.quickcheckout-content label[type="checkbox"] {
