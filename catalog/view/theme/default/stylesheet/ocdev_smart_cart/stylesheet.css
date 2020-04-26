@@ -1122,7 +1122,7 @@ button.smca-call-button {
 @media (min-width: 533px) and (max-width: 645px) {
 
   #smca-modal-body > .modal-footer > input {
-    width: 164px;
+    /*width: 164px;*/
   }
 }
 

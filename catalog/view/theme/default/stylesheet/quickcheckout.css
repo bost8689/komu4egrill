@@ -6,8 +6,8 @@
 	padding: 10px;
 }
 .quickcheckout-content {
-	border: 1px solid #dddddd;
-	padding: 10px;
+	/*border: 1px solid #dddddd;*/
+	padding: 5px;
 	overflow: auto;
 	margin-bottom: 10px;
 }

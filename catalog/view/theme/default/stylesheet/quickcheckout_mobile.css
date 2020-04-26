@@ -20,3 +20,33 @@ table.quickcheckout-cart {
 	width: 30px;
 	height: auto;
 }
+.quickcheckout-content {
+    /* border: 1px solid #dddddd; */
+    /* padding: 10px; */
+    overflow: auto;
+    margin-bottom: 10px;
+}
+.quickcheckout-content .col-sm-6 {
+    padding: 0px;
+}
+.quickcheckout-content label {
+    font-size: 20px;
+    font-weight: bold;
+}
+#quickcheckoutconfirm input[type="radio"] {
+    -webkit-appearance: radio;
+    transform: scale(2.0);
+    opacity: 1;
+    cursor: pointer;
+    margin: 10px 0 0;
+    padding: 10px;
+}
+#quickcheckoutconfirm input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    /* -webkit-appearance: radio; */
+    transform: scale(2.0);
+    /* opacity: 1; */
+    cursor: pointer;
+    margin: 10px;
+    /* padding: 10px; */
+}

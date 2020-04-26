@@ -837,3 +837,9 @@ h2.price {
 	    display: inline;
 	}
 }
+.quickcheckout-content {
+    /* border: 1px solid #dddddd; */
+    /* padding: 10px; */
+    overflow: auto;
+    margin-bottom: 10px;
+}
