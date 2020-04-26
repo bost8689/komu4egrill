@@ -3,6 +3,16 @@
 	<div class="alert alert-danger" style=""><i class="fa fa-exclamation-circle"></i> {{ error_stock }}</div>
 {% endif %}
 </div>
+
+{% for total in totals %} 
+		<tr>
+		  <p><td class="text-right" colspan="4"><b>{{ total.title }}:</b></td>
+		  <td class="text-right">{{ total.text }}</td></p>
+		</tr>
+{% endfor %} 
+
+
+{#
 <table class="table quickcheckout-cart">
   <thead>
 	<tr>
@@ -69,5 +79,5 @@
         {% endfor %} 
 	</tbody>
   {% endif %}
-</table>
+</table> #}
 {% if weight %}<div id="weight-heading"><i class="fa fa-balance-scale"></i> {{ text_weight }} {{ weight }}</div>{% endif %}

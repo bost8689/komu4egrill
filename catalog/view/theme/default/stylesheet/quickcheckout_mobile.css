@@ -33,6 +33,11 @@ table.quickcheckout-cart {
     font-size: 20px;
     font-weight: bold;
 }
+#quickcheckoutconfirm input {
+    font-size: 20px;
+    color: #0087ca;
+    font-weight: bold;
+}
 #quickcheckoutconfirm input[type="radio"] {
     -webkit-appearance: radio;
     transform: scale(2.0);
@@ -44,9 +49,49 @@ table.quickcheckout-cart {
 #quickcheckoutconfirm input[type="checkbox"] {
     -webkit-appearance: checkbox;
     /* -webkit-appearance: radio; */
-    transform: scale(2.0);
+    transform: scale(1.7);
     /* opacity: 1; */
     cursor: pointer;
     margin: 10px;
     /* padding: 10px; */
 }
+#cart1 .quickcheckout-content {
+    font-size: 18px;
+}
+div#cart1 p {
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+}
+.quickcheckout-heading {
+    background: #d6d6d6;
+    font-size: 18px;
+    font-weight: bold;
+}
+/*.quickcheckout-content label[type="checkbox"] {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2096c2;
+}
+*/
+#modal-agree button.close {
+    float: right;
+    font-size: 55px;
+    font-weight: 700;
+    line-height: 0;
+    color: #ec1414;
+    text-shadow: 0 0px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: 10;
+    padding: 2px;
+}
+/*.close {
+    float: right;
+    font-size: 55px;
+    font-weight: 700;
+   
+    color: #ec1414;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    
+}*/
