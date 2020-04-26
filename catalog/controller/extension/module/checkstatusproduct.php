@@ -110,6 +110,7 @@ class ControllerExtensionModuleCheckstatusproduct extends Controller {
       $sendRequest = $this->sendRequest($url);
       $data_decode = json_decode($sendRequest);  
       $online_check = $data_decode->response;
+      //$this->log -> write($online_check);
       if ($online_check->status==1){
         $this->log -> write('online чек принят '.$online_check->transaction_id);
         //accepted
@@ -127,37 +128,45 @@ class ControllerExtensionModuleCheckstatusproduct extends Controller {
         $sendRequest = $this->sendRequest($url);
         $check = json_decode($sendRequest);      
         $check = $check->response[0];
+        $this->log -> write($check);
         $status_gotov = false;
-        foreach ($check->products as $kproducts => $vProduct) {
-          if ($vProduct->product_id==96) {
-            $status_gotov = true;
-            $this->log -> write('Заказ готов');    
-            $this->log -> write('Отправляю смс');  
-
-            //отправка СМС
-            $Order = $this->load->model('checkout/order');
-            $getOrder = $this->model_checkout_order->getOrder($vStatusOrder['im_order_id']);
-            $this->log -> write('Получаю данные заказа из ИМ');  
-            // $this->log -> write($getOrder);
-            $message='Ваш заказ готов. КомуЧЁ GRILL';  
-            if ($getOrder['shipping_method']=='Самовывоз из заведения') {        
-                $message="Ваш заказ #".$vStatusOrder['im_order_id']." готов. Забирайте скорее, горячее вкуснее. КомуЧё GRILL";
+        if ($check->date_close==0){
+           $this->log -> write('Чек открыт');
+            foreach ($check->products as $kproducts => $vProduct) {
+              if ($vProduct->product_id==96) {
+                $status_gotov = true;
+                $this->log -> write('Заказ готов');    
+                $this->log -> write('Отправляю смс');  
+    
+                //отправка СМС
+                $Order = $this->load->model('checkout/order');
+                $getOrder = $this->model_checkout_order->getOrder($vStatusOrder['im_order_id']);
+                $this->log -> write('Получаю данные заказа из ИМ');  
+                // $this->log -> write($getOrder);
+                $message='Ваш заказ готов. КомуЧЁ GRILL';  
+                if ($getOrder['shipping_method']=='Самовывоз из заведения') {        
+                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." готов. Забирайте скорее, горячее вкуснее. КомуЧё GRILL";
+                }
+                elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 1000 руб.'){
+                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. КомуЧё GRILL";             
+                }
+                elseif($getOrder['shipping_method']=='Бесплатная доставка'){
+                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. КомуЧё GRILL"; 
+                }            
+                $this->model_extension_module_checkstatusproduct->setStatusOrder(['poster_status_order'=>'ready','id'=>$vStatusOrder['id']]);
+                //$SMSC_API = $this->load->controller('Extension/Module/SMSC_API',['phones'=>$getOrder['telephone'],'message'=>$message]);
+                //$this->log -> write('телефон');
+                require_once( dirname(__FILE__).DIRECTORY_SEPARATOR.'smsc_api.php');
+                $SMSCAPI = new ControllerExtensionModuleSMSCAPI();
+                $this->log -> write($getOrder['telephone'],$getOrder['shipping_method'],$message);
+                $this->log -> write($SMSCAPI->index(['phones'=>$getOrder['telephone'],'message'=>$message]));
+                //$this->log -> write($SMSC_API);
+              }  
             }
-            elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 1000 руб.'){
-                $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. КомуЧё GRILL";             
-            }
-            elseif($getOrder['shipping_method']=='Бесплатная доставка'){
-                $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. КомуЧё GRILL"; 
-            }            
-            $this->model_extension_module_checkstatusproduct->setStatusOrder(['poster_status_order'=>'ready','id'=>$vStatusOrder['id']]);
-            //$SMSC_API = $this->load->controller('Extension/Module/SMSC_API',['phones'=>$getOrder['telephone'],'message'=>$message]);
-            //$this->log -> write('телефон');
-            require_once( dirname(__FILE__).DIRECTORY_SEPARATOR.'smsc_api.php');
-            $SMSCAPI = new ControllerExtensionModuleSMSCAPI();
-            $this->log -> write($getOrder['telephone'],$getOrder['shipping_method'],$message);
-            $this->log -> write($SMSCAPI->index(['phones'=>$getOrder['telephone'],'message'=>$message]));
-            //$this->log -> write($SMSC_API);
-          }  
+        }
+        else{
+           $this->log -> write('Чек закрыт'); 
+           $this->model_extension_module_checkstatusproduct->setStatusOrder(['poster_status_order'=>'close','id'=>$vStatusOrder['id']]);
         }
       }
       elseif($online_check->status==7){
