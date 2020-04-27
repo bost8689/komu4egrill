@@ -97,14 +97,13 @@ $('#shipping-method input[name=\'shipping_method\'], #shipping-method select[nam
 	
 	//alert(this.value);
 	
-	if(this.value=='xshippingpro.xshippingpro3') {
-		$('input[name="address_1"]').parent().show();
-		$('input[name="address_2"]').parent().show();
+	if(this.value=='xshippingpro.xshippingpro1') {
+	    $('input[name="address_1"]').parent().hide();
+	    $('input[name="address_2"]').parent().hide();
 		
 	} else {
-		$('input[name="address_1"]').parent().hide();
-		$('input[name="address_2"]').parent().hide();
-		
+	    $('input[name="address_1"]').parent().show();
+		$('input[name="address_2"]').parent().show();
 	}
 	{% if not logged %} 
 		if ($('#payment-address input[name=\'shipping_address\']:checked').val()) {
