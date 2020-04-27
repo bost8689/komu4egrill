@@ -19,6 +19,10 @@
 
       <h2>Заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен</h2>
       <h3>Статус вашего заказа:</h3>
+
+      
+
+
       <h2><span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
       <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3>
 
@@ -49,7 +53,7 @@
         <div class="pull-right"><a href="{{ update_link }}" class="btn btn-primary">Обновить статус</a></div>
       </div> #}
        <div class="buttons">
-      <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      <div class="pull-right"><a id="button_continue" rel="nofollow" href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
       </div> 
 
       <!-- Modal -->
@@ -80,6 +84,40 @@
 <script type="text/javascript">
   $(document).ready(function() {
   });  
+
+  i=1;
+  button_continue.onclick = function(e) {
+      if (i==2) {
+        // alert(i);
+        return;
+      } 
+      else {        
+        document.getElementById('myModalLabel').innerHTML = "<span style=color:red>Внимание:</span>";
+        document.getElementById('myModalBody').innerHTML = "<span style=color:black>Повторное нажатие на кнопку Продолжить, закроет страницу со статусом заказа и мы не сможем Вас уведомить.</span>";
+        //console.log(response['status']);
+        $('#myModal').modal('show')
+        i++;
+        return false;
+      }
+  };
+
+
+
+  // $(document).on("click", "a.button_continue", function () {
+  //      $.ajax ({
+  //          // your code
+  //          alert('Спасибо');
+  //      });
+  //       e.preventDefault();
+  // });
+
+  // button_continue.onclick = function() {
+  //   // for(let i=1; i<=2; i++) {
+  //     i = 1;
+  //     alert("Кролик номер " + i);
+  //     i++;
+  //   //}    
+  // };
 
   let order_id = document.getElementById('order_id').innerHTML;
   console.log(order_id); 
@@ -112,11 +150,7 @@
           document.getElementById('myModalBody').innerHTML = response['status'];
           //console.log(response['status']);
           $('#myModal').modal('show')
-        } 
-        
-                     
-        
-        
+        }         
         //цикл
         //document.body.className = 'modal-open';
         //document.getElementById('myModal').className = 'modal fade in';        

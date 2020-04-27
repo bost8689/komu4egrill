@@ -217,7 +217,12 @@ class ControllerCheckoutOrder extends Controller {
 			      	$data['PosterStatusOrder']="ready_dostavka";
 			        $this->log -> write("ваш заказ отправлен курьером");
 			      }
-		    	}  	  	
+		    	}
+		    	elseif($data['getPosterStatusOrder']['poster_status_order']=="close"){ //статус заказ готов
+			      	$data['PosterStatusOrderText']="заказ выполнен";
+			      	$data['PosterStatusOrder']="close";
+			        // $this->log -> write("ваш заказ отправлен курьером");			      
+		    	} 	
 		    }	  
 
 		  $data['update_link']=$this->url->link('checkout/order', "order=".$data['order_id']);
