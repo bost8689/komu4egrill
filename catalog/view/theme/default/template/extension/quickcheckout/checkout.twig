@@ -29,7 +29,7 @@
 	  <div id="success-messages"></div>
 	  {% if mobile_stylesheet %}
 	  <link rel="stylesheet" media="screen and (min-width: 701px) and (max-width: 99999px)" href="{{ stylesheet }}" />
-	  <link rel="stylesheet" media="screen and (min-width: 1px) and (max-width: 767px)" href="{{ mobile_stylesheet }}" />
+	  <link rel="stylesheet" media="screen and (min-width: 1px) and (max-width: 99999px)" href="{{ mobile_stylesheet }}" />
 	  {% else %}   
 	  <link rel="stylesheet" href="{{ stylesheet }}" />
 	  {% endif %}
@@ -1522,6 +1522,11 @@ $('.time').datetimepicker({
 $('.datetime').datetimepicker({
 	locale: 'ru'
 });
+//alert("test");
+navbar = document.getElementById("menu");
+navbar.style.display = "none";
+document.getElementById("search").style.display = "none";
+
 //--></script>
 {# if error_warning %}
 	<script type="text/javascript"><!--
