@@ -857,8 +857,3 @@ h2.price {
     background-color: #4a801e;
     /* background-position: 0 -15px; */
 }
-@media (min-width: 768px){
-	.container {
-	    width: 100%;
-	}
-}
