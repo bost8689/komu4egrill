@@ -1,3 +1,4 @@
+
 {{ header }}
 <div class="container">
   {#<ul class="breadcrumb">
@@ -37,6 +38,7 @@
 	  {% if html_header %} 
 	  {{ html_header }} 
 	  {% endif %} 
+
 
 	  <div id="quickcheckoutconfirm">
 	  	{% if quickcheckout_layout == '4' %} 
@@ -241,6 +243,17 @@
 {{ custom_css }}
 </style>
 {% endif %} 
+<script type="text/javascript"><!--
+navbar = document.getElementById("menu");
+navbar.style.display = "none";
+document.getElementById("search").style.display = "none";
+document.getElementById("logo").style.display = "none";
+document.getElementById("top-links").style.display = "none";
+document.getElementById("top").style.display = "none";
+
+var cart = document.getElementById("cart");
+cart.classList.add("navbar-fixed-bottom");
+//--></script>
 <script type="text/javascript"><!--
 {% if load_screen %} 
 $(window).on('load', function(){
@@ -1533,14 +1546,4 @@ $('.datetime').datetimepicker({
 {% endif #}
 {{ footer }}
 
-<script type="text/javascript"><!--
-navbar = document.getElementById("menu");
-navbar.style.display = "none";
-document.getElementById("search").style.display = "none";
-document.getElementById("logo").style.display = "none";
-document.getElementById("top-links").style.display = "none";
-document.getElementById("top").style.display = "none";
 
-var cart = document.getElementById("cart");
-cart.classList.add("navbar-fixed-bottom");
-//--></script>

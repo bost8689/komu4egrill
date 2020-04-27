@@ -540,11 +540,11 @@ footer h5 {
 }
 .btn-inverse {
 	color: #ffffff;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	background-color: #da1612;
-	background-image: linear-gradient(to bottom, #da1612, #a94442);
-	background-repeat: repeat-x;
-	border-color: #222222 #222222 #000000;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #539a19;
+    background-image: linear-gradient(to bottom, #539a19, #539a19);
+    background-repeat: repeat-x;
+    border-color: #222222 #222222 #000000;
 }
 .btn-inverse:hover, .btn-inverse:active, .btn-inverse.active, .btn-inverse.disabled, .btn-inverse[disabled] {
 	/*background-color: #222222;*/
