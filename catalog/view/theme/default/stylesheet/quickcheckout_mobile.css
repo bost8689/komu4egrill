@@ -30,17 +30,17 @@ table.quickcheckout-cart {
     padding: 0px;
 }
 .quickcheckout-content label {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
 }
 #quickcheckoutconfirm input {
-    font-size: 16px;
+    /*font-size: 16px;*/
     color: #0087ca;
     font-weight: bold;
 }
 #quickcheckoutconfirm input[type="radio"] {
     -webkit-appearance: radio;
-    transform: scale(2.0);
+    transform: scale(1.2);
     opacity: 1;
     cursor: pointer;
     margin: 10px 0 0;
@@ -56,16 +56,16 @@ table.quickcheckout-cart {
     /* padding: 10px; */
 }
 #cart1 .quickcheckout-content {
-    font-size: 16px;
+    font-size: 14px;
 }
 div#cart1 p {
     color: green;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
 }
 .quickcheckout-heading {
     background: #d6d6d6;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
 }
 /*.quickcheckout-content label[type="checkbox"] {
