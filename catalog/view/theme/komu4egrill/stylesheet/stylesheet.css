@@ -26,10 +26,10 @@ h2 {
     color: green;
 }*/
 
-#content h2{
-	color: green;
-    /*color: green;*/
+#content h2 {
+    color: green;    
     font-weight: bold;
+    padding: 30px 0 0 0;
 }
 h3 {
 	font-size: 18px;
@@ -857,3 +857,4 @@ h2.price {
     background-color: #4a801e;
     /* background-position: 0 -15px; */
 }
+
