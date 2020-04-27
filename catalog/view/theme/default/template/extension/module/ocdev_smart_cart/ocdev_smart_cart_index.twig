@@ -195,12 +195,12 @@
   </div>
   <!-- BUTTONS -->
   <div class="modal-footer">
-    <input type="button" onclick="$.magnificPopup.close();" value="{{ button_go_back }}" class="close-button-bottom" />
+    <input type="button" onclick="$.magnificPopup.close();" value="< Продолжить" class="close-button-bottom" />
     {% if products %}
       {% if hide_save_cart_button %}
       <input type="button" onclick="$('#save-cart-data').slideToggle();" value="{{ button_save_cart }}" class="save-button-bottom" />
       {% endif %}
-      <input type="button" onclick="location.href='{{ checkout_link }}';" value="{{ button_go_to_checkout }}" class="go-button-bottom" />
+      <input type="button" onclick="location.href='{{ checkout_link }}';" value="Оформление заказа >" class="go-button-bottom" />
     {% endif %}
   </div>
 
