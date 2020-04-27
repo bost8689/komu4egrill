@@ -24,7 +24,7 @@
 
 
       <h2><span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
-      <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3>
+      {# <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3> #}
 
       {# <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -68,7 +68,7 @@
              Вот оно!! оооооо
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Хорошо</button>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@ document.getElementById("cart").style.display = "none";
       } 
       else {        
         document.getElementById('myModalLabel').innerHTML = "<span style=color:red>Внимание:</span>";
-        document.getElementById('myModalBody').innerHTML = "<span style=color:black>Повторное нажатие на кнопку Продолжить, закроет страницу со статусом заказа и мы не сможем Вас уведомить.</span>";
+        document.getElementById('myModalBody').innerHTML = "<span style=color:black>Повторное нажатие на кнопку Продолжить, закроет страницу со статусом заказа и мы не сможем сообщить Вам, когда он будет готов.</span>";
         //console.log(response['status']);
         $('#myModal').modal('show')
         i++;
