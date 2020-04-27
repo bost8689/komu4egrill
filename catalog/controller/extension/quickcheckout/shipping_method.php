@@ -154,7 +154,7 @@ class ControllerExtensionQuickCheckoutShippingMethod extends Controller {
 		} else {
 			$data['code'] = $this->config->get('quickcheckout_shipping_default');
 		}
-		
+		//var_dump($data['shipping_methods']);
 		$exists = false;
 		$stored_code = false;
 		

@@ -43,8 +43,8 @@ table.quickcheckout-cart {
     transform: scale(1.2);
     opacity: 1;
     cursor: pointer;
-    margin: 10px 0 0;
-    padding: 10px;
+    /*margin: 10px 0 0;*/
+    /*padding: 10px;*/
 }
 #quickcheckoutconfirm input[type="checkbox"] {
     -webkit-appearance: checkbox;
@@ -52,7 +52,7 @@ table.quickcheckout-cart {
     transform: scale(1.7);
     /* opacity: 1; */
     cursor: pointer;
-    margin: 10px;
+    margin: 0px;
     /* padding: 10px; */
 }
 #cart1 .quickcheckout-content {
@@ -95,3 +95,12 @@ div#cart1 p {
     filter: alpha(opacity=20);
     
 }*/
+.navbar-fixed-bottom {
+    
+    margin-bottom: 0;
+    
+    /* margin-bottom: 10px; */
+}
+#cart {
+    margin-bottom: 0px;
+}

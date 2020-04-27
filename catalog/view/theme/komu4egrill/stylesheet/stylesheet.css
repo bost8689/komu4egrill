@@ -191,7 +191,7 @@ div.required .control-label:before {
 }
 /* cart */
 #cart {
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 #cart > .btn {
 	font-size: 12px;
