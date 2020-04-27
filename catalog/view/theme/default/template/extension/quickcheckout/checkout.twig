@@ -1,10 +1,10 @@
 {{ header }}
 <div class="container">
-  <ul class="breadcrumb">
+  {#<ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %} 
     <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
     {% endfor %} 
-  </ul>
+  </ul> #}
   <div class="row">{{ column_left }} 
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
@@ -1523,9 +1523,7 @@ $('.datetime').datetimepicker({
 	locale: 'ru'
 });
 //alert("test");
-navbar = document.getElementById("menu");
-navbar.style.display = "none";
-document.getElementById("search").style.display = "none";
+
 
 //--></script>
 {# if error_warning %}
@@ -1534,3 +1532,15 @@ document.getElementById("search").style.display = "none";
 	//--></script>
 {% endif #}
 {{ footer }}
+
+<script type="text/javascript"><!--
+navbar = document.getElementById("menu");
+navbar.style.display = "none";
+document.getElementById("search").style.display = "none";
+document.getElementById("logo").style.display = "none";
+document.getElementById("top-links").style.display = "none";
+document.getElementById("top").style.display = "none";
+
+var cart = document.getElementById("cart");
+cart.classList.add("navbar-fixed-bottom");
+//--></script>
