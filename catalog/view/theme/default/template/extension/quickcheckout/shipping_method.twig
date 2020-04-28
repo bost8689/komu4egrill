@@ -95,8 +95,18 @@
 
 $('#shipping-method input[name=\'shipping_method\'], #shipping-method select[name=\'shipping_method\']').on('change', function() {
 	
-	//alert(this.value);
+	//i=1;
+  	$('button.btn.btn-navbar.navbar-toggle').onclick = function(e) {
+  		alert(this.value);
+  // 		document.getElementById("search").style.display = "none";
+		// cart.classList.add("navbar-fixed-bottom");
+
+		
+
+  	};
+
 	
+
 	if(this.value=='xshippingpro.xshippingpro1') {
 	    $('input[name="address_1"]').parent().hide();
 	    $('input[name="address_2"]').parent().hide();

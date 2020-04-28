@@ -4,13 +4,68 @@
 
 <script type="text/javascript"><!--
 
-document.getElementById("search").style.display = "none";
+//document.getElementById("search").style.display = "none";
 //document.getElementById("logo").style.display = "none";
 document.getElementById("top-links").style.display = "none";
 //document.getElementById("top").style.display = "none";
 
 //var cart = document.getElementById("cart");
 //cart.classList.add("navbar-fixed-bottom");
+
+  // $('button.btn.btn-navbar.navbar-toggle').onclick = function(e) {
+  //   alert(this.value);
+  // //    document.getElementById("search").style.display = "none";
+  // // cart.classList.add("navbar-fixed-bottom");
+
+  // };
+// var navbar = document.getElementById("menu");
+// var i = 0;
+
+
+
+
+// $('#menu').on('shown.bs.collapse', function () {
+//   if(i==0){
+//     alert('s1');
+//     $('.navbar-collapse.navbar-ex1-collapse.collapse.in').collapse('hide');
+    
+//     // $('#menu').collapse({
+//     //   hide: true
+//     // });    
+//     // $('#menu').collapse('hide'); 
+//     // console.log($('#menu'));  
+//     alert('2');
+//     i++;
+//   };
+  
+  
+   
+//   //console.log(this.value);
+//   //alert(this.value);
+
+//   // do something…
+// })
+
+
+window.addEventListener('scroll', function() {
+  //console.log(window.pageYOffset);
+  //console.log(pageYOffset);
+  //console.log($('#menu').collapse());
+ $('.navbar-collapse.navbar-ex1-collapse.collapse.in').collapse('hide');
+});
+//alert('Начало');
+  // $('#menu').collapse({
+  //       hide: true 
+          
+  //   });
+
+  
+
+var cart = document.getElementById("cart");
+cart.classList.add("navbar-fixed-bottom");
+
+navbar = document.getElementById("menu");
+navbar.classList.add("navbar-fixed-top");
 
 //--></script>
 
@@ -199,11 +254,7 @@ document.getElementById("top-links").style.display = "none";
 </div>
 <script type="text/javascript"><!--
 
-var cart = document.getElementById("cart");
-cart.classList.add("navbar-fixed-bottom");
 
-navbar = document.getElementById("menu");
-navbar.classList.add("navbar-fixed-top");
 
 //--></script>
 {{ footer }} 
