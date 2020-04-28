@@ -2,11 +2,11 @@
 $_['heading_title']                  = 'Оформление заказа';
 // Text
 $_['text_checkout_option']           = 'Уже зарегистрированы? Войдите';
-$_['text_checkout_account']          = 'Данные клиента';
+$_['text_checkout_account']          = '2 - Введите данные получателя!';
 $_['text_checkout_payment_address']  = 'Данные плательщика';
 $_['text_checkout_shipping_address'] = 'Адрес доставки';
-$_['text_checkout_shipping_method']  = 'Способы доставки';
-$_['text_checkout_payment_method']   = 'Способы оплаты';
+$_['text_checkout_shipping_method']  = '1 - Выберите способ доставки';
+$_['text_checkout_payment_method']   = '3 - Выберите способ оплаты';
 $_['text_checkout_confirm']          = 'Оформить заказ';
 $_['text_agree']                     = 'Я прочитал и согласен с <a class="agree" href="%s" alt="%s"><b>%s</b></a>';
 $_['text_create_account']			 = 'Зарегистрироваться на сайте.';
