@@ -679,7 +679,7 @@ h2.price {
 }
 .product-thumb .price {
 	/*color: #444;*/
-	color: #23a1d1;
+	color: #ef800e;
     font-size: 22px;
     background-color: rgba(255,255,255,.15);
     border-radius: 20px;
@@ -718,7 +718,7 @@ h2.price {
 	border: none;
 	display: inline-block;
 	float: left;
-	background-color: #23a1d1;
+	background-color: #ef800e;
 	color: #fff;
 	line-height: 38px;
 	font-weight: bold;
@@ -731,7 +731,7 @@ h2.price {
 }
 .product-thumb .button-group button:hover {
 	color: #fff;
-	background-color: #1f8cb6;
+	background-color: #c76807;
 	text-decoration: none;
 	cursor: pointer;
 }
