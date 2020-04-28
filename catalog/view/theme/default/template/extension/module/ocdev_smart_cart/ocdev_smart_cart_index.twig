@@ -34,12 +34,12 @@
                   {% if hide_main_img %}
                   <div class="name-left">
                     {% if product.thumb %}
-                      <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /></a>
+                      {# <a href="{{ product.href }}"> #} <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /> {#</a>#}
                     {% endif %}
                   </div>
                   {% endif %}
                   <div class="name-right{% if not hide_main_img %}{{ ' fix' }}{% endif %}">
-                    <a href="{{ product.href }}" title="{{ product.name }}" {% if not product.stock %}{{ 'class="error-stock"' }}{% endif %} >{{ product.name }}</a>
+                    {# <a href="{{ product.href }}" #} <span title="{{ product.name }}" {% if not product.stock %}{{ 'class="error-stock"' }}{% endif %} >{{ product.name }}</span>
                     {% if product.model  and  hide_product_model %}<div class="model"><span>{{ text_model }}</span>{{ product.model }}</div>{% endif %}
                     {% if product.ean  and  hide_product_ean %}<div class="ean"><span>{{ text_ean }}</span>{{ product.ean }}</div>{% endif %}
                     {% if product.jan  and  hide_product_jan %}<div class="jan"><span>{{ text_jan }}</span>{{ product.jan }}</div>{% endif %}
@@ -195,7 +195,7 @@
   </div>
   <!-- BUTTONS -->
   <div class="modal-footer">
-    <input type="button" onclick="$.magnificPopup.close();" value="< Продолжить" class="close-button-bottom" />
+    <input type="button" onclick="$.magnificPopup.close();" value="< Закрыть корзину" class="close-button-bottom" />
     {% if products %}
       {% if hide_save_cart_button %}
       <input type="button" onclick="$('#save-cart-data').slideToggle();" value="{{ button_save_cart }}" class="save-button-bottom" />

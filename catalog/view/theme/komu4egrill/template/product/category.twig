@@ -5,9 +5,9 @@
 <script type="text/javascript"><!--
 
 document.getElementById("search").style.display = "none";
-document.getElementById("logo").style.display = "none";
+//document.getElementById("logo").style.display = "none";
 document.getElementById("top-links").style.display = "none";
-document.getElementById("top").style.display = "none";
+//document.getElementById("top").style.display = "none";
 
 //var cart = document.getElementById("cart");
 //cart.classList.add("navbar-fixed-bottom");
@@ -21,7 +21,7 @@ document.getElementById("top").style.display = "none";
     {% for breadcrumb in breadcrumbs %}
     <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
     {% endfor %}
-  </ul>   #}
+  </ul> #}
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
