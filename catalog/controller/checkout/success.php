@@ -113,9 +113,8 @@ class ControllerCheckoutSuccess extends Controller {
                 $incoming_order = [
                     'spot_id'   => 1,
                     'first_name' => $getOrder['firstname'],
-                    'phone'     =>  $getOrder['telephone'],
-                    'address' => '#'.$getOrder['order_id'].' '.$getOrder['payment_address_1'].' '.$getOrder['payment_address_2'],
-                    'comment' => $getOrder['shipping_method'].' '.$getOrder['payment_method'].' тел.'.$getOrder['telephone'],
+                    'phone'     =>  $getOrder['telephone'],                    
+                    'comment' => '#'.$getOrder['order_id'].' '.$getOrder['payment_address_1'].' '.$getOrder['payment_address_2'].' '.$getOrder['shipping_method'].' '.$getOrder['payment_method'].' тел.'.$getOrder['telephone'],
                     'products'  => $products_for_order,
                 ];
                 $log_poster->write($incoming_order);
