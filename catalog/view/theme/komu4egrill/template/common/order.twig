@@ -14,10 +14,11 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
+      <h2>Заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен</h2>
       <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени.</h3>
 
 
-      <h2>Заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен</h2>
+      
       <h3>Статус вашего заказа:</h3>
 
       
@@ -83,7 +84,7 @@
 navbar = document.getElementById("menu");
 navbar.style.display = "none";
 document.getElementById("search").style.display = "none";
-document.getElementById("logo").style.display = "none";
+//document.getElementById("logo").style.display = "none";
 document.getElementById("top-links").style.display = "none";
 document.getElementById("top").style.display = "none";
 
@@ -96,6 +97,10 @@ document.getElementById("cart").style.display = "none";
 <script type="text/javascript">
   $(document).ready(function() {
   });  
+
+  // getElementById("logo").onclick = function(e) {
+  //   alert(ura):
+  // };
 
   i=1;
   button_continue.onclick = function(e) {

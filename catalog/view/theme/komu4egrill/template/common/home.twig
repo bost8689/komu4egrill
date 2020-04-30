@@ -3,6 +3,9 @@
 
 window.onscroll = function() {myFunction()};
 
+var container_menu = document.getElementById("container_menu");
+
+
 var navbar = document.getElementById("menu");
 var cart = document.getElementById("cart");
 //alert(navbar);
@@ -18,7 +21,6 @@ window.addEventListener('scroll', function() {
   //console.log(window.pageYOffset);
   //console.log(pageYOffset + 'px pageYOffset');
   $('.navbar-collapse.navbar-ex1-collapse.collapse.in').collapse('hide');
-
 });
 var countfixed = 0;
 var navbarfixed = 0;
@@ -27,25 +29,27 @@ function myFunction() {  //alert(navbar);
   if (window.pageYOffset >= sticky) { 
     if( countfixed==0 ){
       navbarfixed = sticky;
-      navbar.classList.add("navbar-fixed-top");
+      container_menu.classList.add("navbar-fixed-top");
+      //navbar.classList.add("navbar-fixed-top");
       cart.classList.add("navbar-fixed-bottom");      
       countfixed++;
-      console.log('1countfixed + ' + countfixed);
-      console.log('1sticky ' + sticky);
-      console.log('1pageYOffset ' + pageYOffset);
+      // console.log('1countfixed + ' + countfixed);
+      // console.log('1sticky ' + sticky);
+      // console.log('1pageYOffset ' + pageYOffset);
     }
     
   } 
-  console.log('navbarfixed ' + navbarfixed);
-   console.log('pageYOffset ' + pageYOffset);
-   console.log('sticky ' + sticky);
-   console.log('px stickyCart ' + stickyCart);
+  // console.log('navbarfixed ' + navbarfixed);
+  //  console.log('pageYOffset ' + pageYOffset);
+  //  console.log('sticky ' + sticky);
+  //  console.log('px stickyCart ' + stickyCart);
    
 
   if (window.pageYOffset <= navbarfixed) { 
     if(countfixed==1){
       navbarnonfixed = pageYOffset;
-      navbar.classList.remove("navbar-fixed-top");
+      //navbar.classList.remove("navbar-fixed-top");
+      container_menu.classList.remove("navbar-fixed-top");
       cart.classList.remove("navbar-fixed-bottom");
       countfixed = countfixed - 1;
       console.log('3countfixed = ' + countfixed);
