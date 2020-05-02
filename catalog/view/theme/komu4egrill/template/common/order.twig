@@ -17,15 +17,13 @@
       <h2>Заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен</h2>
       <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени.</h3>
 
-
-      
-      <h3>Статус вашего заказа:</h3>
-
-      
-
-
-      <h2><span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
-      {# <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3> #}
+      {% if PosterStatusOrder=="not_ready" %}
+      <h2><span>Ваш заказ добавлен в очередь, в ближайшее время его обработают и на этой странице изменится статус заказа.</span></h2>
+      <h3>Статус вашего заказа: <span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h3>
+      {% else %}
+      <h2>Статус вашего заказа: <span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
+      {% endif %}      
+      <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3>
 
       {# <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -54,7 +52,7 @@
         <div class="pull-right"><a href="{{ update_link }}" class="btn btn-primary">Обновить статус</a></div>
       </div> #}
        <div class="buttons">
-      <div class="pull-right"><a id="button_continue" rel="nofollow" href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      <div class="pull-right"><a id="button_continue" rel="nofollow" href="{{ continue }}" class="btn btn-primary">{# {{ button_continue }} #} Закрыть </a></div>
       </div> 
 
       <!-- Modal -->
@@ -98,9 +96,10 @@ document.getElementById("cart").style.display = "none";
   $(document).ready(function() {
   });  
 
-  // getElementById("logo").onclick = function(e) {
-  //   alert(ura):
-  // };
+$('#logo').click(function(e) {
+    e.preventDefault();
+    //do other stuff when a click happens
+});
 
   i=1;
   button_continue.onclick = function(e) {
@@ -110,7 +109,7 @@ document.getElementById("cart").style.display = "none";
       } 
       else {        
         document.getElementById('myModalLabel').innerHTML = "<span style=color:red>Внимание:</span>";
-        document.getElementById('myModalBody').innerHTML = "<span style=color:black>Повторное нажатие на кнопку Продолжить, закроет страницу со статусом заказа и мы не сможем сообщить Вам, когда он будет готов.</span>";
+        document.getElementById('myModalBody').innerHTML = "<span style=color:black;font-weight:100>Повторное нажатие на кнопку Закрыть, закроет страницу со статусом заказа и мы не сможем сообщить Вам, когда он будет готов.</span>";
         //console.log(response['status']);
         $('#myModal').modal('show')
         i++;
@@ -183,4 +182,4 @@ document.getElementById("cart").style.display = "none";
 
 </script>
 
-{{ footer }}
+{# {{ footer }} #}
