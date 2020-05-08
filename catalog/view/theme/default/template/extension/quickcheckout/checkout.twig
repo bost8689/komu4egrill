@@ -247,6 +247,9 @@
 
 
 
+
+
+
 navbar = document.getElementById("menu");
 navbar.style.display = "none";
 document.getElementById("search").style.display = "none";
@@ -256,6 +259,27 @@ document.getElementById("top").style.display = "none";
 
 var cart = document.getElementById("cart");
 cart.classList.add("navbar-fixed-bottom");
+
+ $("input:text").focus(function(){     
+     cart.style.display = "none";
+ });
+
+ $("input:text").focusout(function(){     
+ 	cart.style.display = "block";
+     //alert('Элемент foo потерял фокус.');
+ });
+
+
+ // $("textarea").focus(function(){     
+ //     cart.style.display = "none";
+ // });
+
+ // $("textarea").focusout(function(){     
+ // 	cart.style.display = "block";
+ //     //alert('Элемент foo потерял фокус.');
+ // });
+
+ 
 
 
 

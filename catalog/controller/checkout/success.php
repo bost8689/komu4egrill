@@ -37,8 +37,8 @@ class ControllerCheckoutSuccess extends Controller {
 		
 	 public function index() {
 			$this->load->language('checkout/success');			
-			$log_poster = New Log('log_poster.txt');
-	    $log_poster -> write('Запуск Success');
+			$log = New Log('checkout_success.txt');
+	    	$log -> write('начало скрипта checkout_success');
 	    // return;
 
 		  if (isset($this->session->data['order_id'])) {
@@ -54,6 +54,8 @@ class ControllerCheckoutSuccess extends Controller {
 			//получение данных из заказа
 		    $Order = $this->load->model('checkout/order');
 		    $getOrder = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+		    $log -> write($getOrder);
+		    
 		    $getOrderProducts = $this->model_checkout_order->getOrderProducts($this->session->data['order_id']);
 		    $data['order_id']=$this->session->data['order_id'];
 
@@ -66,7 +68,7 @@ class ControllerCheckoutSuccess extends Controller {
 		        $getProduct = $this->model_extension_module_example->getProduct(['id_product_im'=>$value['product_id']]);
 		        if (!$getProduct) {
 		            $data['error']='Не нашли в базе ИМ продукт с id '.$value['product_id'].' #заказа:'.$getOrder['order_id'];
-		            $log_poster -> write($data['error']);		            
+		            $log -> write($data['error']);		            
 		        }
                 else{
                     $data['getOrderProducts'][]=['product_id'=>$getProduct['id_product_im'],'name'=>$getProduct['name_poster'],'price'=>$value['price'],'quantity'=>$value['quantity'],'total'=>$value['total']];
@@ -104,7 +106,7 @@ class ControllerCheckoutSuccess extends Controller {
 
 
             if (!empty($data['error'])) {
-                $log_poster->write('Есть ошибка - не могу выполнить запрос:'.$data['error']);
+                $log->write('Есть ошибка - не могу выполнить запрос:'.$data['error']);
             }
             else{ //ошибок не было создаём заказ
                 //ПРИМЕР создать online заказ 
@@ -114,27 +116,25 @@ class ControllerCheckoutSuccess extends Controller {
                     'spot_id'   => 1,
                     'first_name' => $getOrder['firstname'],
                     'phone'     =>  $getOrder['telephone'],                    
-                    'comment' => '#'.$getOrder['order_id'].' '.$getOrder['payment_address_1'].' '.$getOrder['payment_address_2'].' '.$getOrder['shipping_method'].' '.$getOrder['payment_method'].' тел.'.$getOrder['telephone'],
+                    'comment' => '#'.$getOrder['order_id'].' '.$getOrder['comment'].' '.$getOrder['payment_address_1'].' '.$getOrder['payment_address_2'].' '.$getOrder['shipping_method'].' '.$getOrder['payment_method'].' тел.'.$getOrder['telephone'],
                     'products'  => $products_for_order,
                 ];
-                $log_poster->write($incoming_order);
+                $log->write($incoming_order);
                 
-                //добавляю новый статус продукт
-                $data_incoming_order = $this->sendRequest($url, 'post', $incoming_order);
+                
+                //отправляю заказ на постер
+                $data_incoming_order = $this->sendRequest($url, 'post', $incoming_order); //Отправка зказа
                 $data_decode = json_decode($data_incoming_order);
-                $log_poster->write($data_incoming_order); 
-                
+                $log->write($data_incoming_order);                 
      
                 if (isset($data_decode->error)) {
                     //пришла ошибка
-                    $log_poster->write($data_decode->message); 
+                    $log->write($data_decode->message); 
                 }
                 elseif (isset($data_decode->response)) {
-                    $log_poster->write($data_decode->response->incoming_order_id);
-
+                    $log->write($data_decode->response->incoming_order_id);
                     $this->load->model('extension/module/checkstatusproduct');
-
-                    $addStatusPoduct = $this->model_extension_module_checkstatusproduct->addStatusProduct(['im_order_id'=>$getOrder['order_id'],'poster_order_id'=>$data_decode->response->incoming_order_id,'poster_transaction_id'=>0,'poster_status_order'=>'not_ready','status_sms'=>'not_send']);
+                    $addStatusPoduct = $this->model_extension_module_checkstatusproduct->addStatusProduct(['im_order_id'=>$getOrder['order_id'],'poster_order_id'=>$data_decode->response->incoming_order_id,'poster_transaction_id'=>0,'poster_status_order'=>'not_ready','status_sms'=>'order_send_on_poster']);
                 }
             }		
 
