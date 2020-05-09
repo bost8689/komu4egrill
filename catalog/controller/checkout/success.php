@@ -120,8 +120,6 @@ class ControllerCheckoutSuccess extends Controller {
                     'products'  => $products_for_order,
                 ];
                 $log->write($incoming_order);
-                
-                
                 //отправляю заказ на постер
                 $data_incoming_order = $this->sendRequest($url, 'post', $incoming_order); //Отправка зказа
                 $data_decode = json_decode($data_incoming_order);
