@@ -189,6 +189,7 @@ class ControllerCheckoutOrder extends Controller {
 		    	if($data['getPosterStatusOrder']['poster_status_order']=="cancell"){
 		    		$this->log -> write("Заказ Отменен");
 		    		$data['PosterStatusOrderText']="отменен";
+		    		$data['PosterStatusOrder']="otmena";
 		    	}
 		    	elseif($data['getPosterStatusOrder']['poster_status_order']=="not_ready"){
 		    		$data['PosterStatusOrderText']="в обработке";
@@ -227,7 +228,8 @@ class ControllerCheckoutOrder extends Controller {
 
 		  $data['update_link']=$this->url->link('checkout/order', "order=".$data['order_id']);
 			  //если это запрос от ajax
-		 
+
+		 //если POST содержит ордер ид
 		  if (isset($this->request->post['order_id'])) {
 		  	//$this->ajax();
 		  	$data['order_id']=$this->request->post['order_id'];
@@ -237,7 +239,8 @@ class ControllerCheckoutOrder extends Controller {
 	  		
 	  		if(isset($data['PosterStatusOrderText'])){
 	  		    $this->log -> write($data['PosterStatusOrderText']);
-	  			$json['status'] = $data['PosterStatusOrderText'];		
+	  			$json['status'] = $data['PosterStatusOrderText'];
+	  			$json['poster_status'] = $data['PosterStatusOrder'];		
 					
 	  		}
 	  		else{
@@ -248,10 +251,27 @@ class ControllerCheckoutOrder extends Controller {
 			$this->response->setOutput(json_encode($json)); 
 
 			return;				
-	  	}	
+	  	} //если GET запрос
 	  	else{ // get
 	  		// $addStatusPoduct = $this->model_extension_module_checkstatusproduct->addStatusProduct(['im_order_id'=>55,'poster_order_id'=>66,'poster_transaction_id'=>0,'poster_status_order'=>'not_ready','status_sms'=>'not_send']);
 	  		//$this->ajax();
+	  		if ($this->request->server['HTTPS']) {
+				$server = $this->config->get('config_ssl');
+			} else {
+				$server = $this->config->get('config_url');		
+			}
+	  		//if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
+			$data['status_gotovo'] = $server . 'image/' . 'status_gotovo.gif';
+			$data['status_gotovka'] = $server . 'image/' . 'status_gotovka.gif';
+			$data['status_obrabotka'] = $server . 'image/' . 'status_obrabotka.gif';
+			$data['status_dostavka'] = $server . 'image/' . 'status_dostavka.gif';
+			//} else {
+				//$data['logo'] = '';
+			//}
+			//var_dump($server);
+			//var_dump($data['logo']);
+			//return;
+
 	  		$this->response->setOutput($this->load->view('common/order', $data));
 	  	}
 			  

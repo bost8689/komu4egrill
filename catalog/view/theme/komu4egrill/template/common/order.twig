@@ -18,9 +18,14 @@
       <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени.</h3>
       
       <h2>Статус вашего заказа: <span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
-           
-      <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3>
 
+      <span id="PosterStatusOrder" style="display: none">{{PosterStatusOrder}}</span>
+      <div id="status_obrabotka" style="display: none"> <img src="{{ status_obrabotka }}" title="статус" alt="статус" class="img-responsive" /></div>
+      <div id="status_gotovka" style="display: none"> <img src="{{ status_gotovka }}" title="статус" alt="статус" class="img-responsive" /></div> 
+      <div id="status_gotovo" style="display: none"> <img src="{{ status_gotovo }}" title="статус" alt="статус" class="img-responsive" /></div>       
+      <div id="status_dostavka" style="display: none"> <img src="{{ status_dostavka }}" title="статус" alt="статус" class="img-responsive" /></div>
+
+      <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3>
       {# <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
       Нажми! 
@@ -92,15 +97,15 @@ document.getElementById("cart").style.display = "none";
   $(document).ready(function() {
   });  
 
-$('#logo').click(function(e) {
-    e.preventDefault();
-    //do other stuff when a click happens
-});
+  //отключаю клик на логотипе
+	$('#logo').click(function(e) {
+	   e.preventDefault();	    
+	});
 
+	//после клика модальное окно всплывает
   i=1;
   button_continue.onclick = function(e) {
       if (i==2) {
-        // alert(i);
         return;
       } 
       else {        
@@ -132,12 +137,29 @@ $('#logo').click(function(e) {
   // };
 
   let order_id = document.getElementById('order_id').innerHTML;
-  console.log(order_id); 
-  console.log('ура'); // Возвращаемые данные выводим в консоль
+  // console.log(order_id); 
+  // console.log('ура'); // Возвращаемые данные выводим в консоль
 
   setInterval(function() {
     //console.log(new Date().toLocaleTimeString());  
-  }, 1000)
+  }, 1000) //каждую секунду
+
+
+	if(document.getElementById('PosterStatusOrder').innerHTML=="not_ready"){
+	  document.getElementById("status_obrabotka").style.display = "block";
+	}
+	else if(document.getElementById('PosterStatusOrder').innerHTML=="accepted"){
+	  document.getElementById("status_gotovka").style.display = "block";
+	}
+	else if (document.getElementById('PosterStatusOrder').innerHTML=="ready_sam"){
+	  document.getElementById("status_gotovo").style.display = "block";
+	}
+	else if (document.getElementById('PosterStatusOrder').innerHTML=="ready_dostavka"){
+	  document.getElementById("status_dostavka").style.display = "block";
+	}
+	else if (document.getElementById('PosterStatusOrder').innerHTML=="close"){
+	  document.getElementById("status_gotovo").style.display = "block";
+	}
 
   setInterval(function() {
     $.ajax({
@@ -156,11 +178,53 @@ $('#logo').click(function(e) {
       },
       success: function(response) { 
         //console.log("success " + new Date().toLocaleTimeString()+'-'+performance.now());
-        //console.log(performance.now());
+        console.log( document.getElementById('PosterStatusOrder').innerHTML);
+
+        //если статус изменился, то присваиваем новый текст
         if (document.getElementById('PosterStatusOrderText').innerHTML != response['status']) {
-          document.getElementById('PosterStatusOrderText').innerHTML = response['status'];
-          document.getElementById('myModalBody').innerHTML = response['status'];
+          document.getElementById('PosterStatusOrderText').innerHTML = response['status']; 
+          document.getElementById('myModalBody').innerHTML = response['status'];          
           //console.log(response['status']);
+
+        if(response['poster_status']=="not_ready"){
+				  document.getElementById("status_obrabotka").style.display = "block";
+
+				  document.getElementById("status_gotovka").style.display = "none";
+				  document.getElementById("status_gotovo").style.display = "none";
+				  document.getElementById("status_dostavka").style.display = "none";
+				 
+				}
+				else if(response['poster_status']=="accepted"){
+				  document.getElementById("status_gotovka").style.display = "block";
+
+				  document.getElementById("status_obrabotka").style.display = "none";
+				  document.getElementById("status_gotovo").style.display = "none";
+				  document.getElementById("status_dostavka").style.display = "none";
+				
+				}
+				else if (response['poster_status']=="ready_sam"){
+				  document.getElementById("status_gotovo").style.display = "block";
+
+				  document.getElementById("status_gotovka").style.display = "none";
+				  document.getElementById("status_obrabotka").style.display = "none";
+				  document.getElementById("status_dostavka").style.display = "none";
+		
+				}
+				else if (response['poster_status']=="ready_dostavka"){
+				  document.getElementById("status_dostavka").style.display = "block";
+
+				  document.getElementById("status_gotovka").style.display = "none";
+				  document.getElementById("status_gotovo").style.display = "none";
+				  document.getElementById("status_obrabotka").style.display = "none";
+				}
+				else if (response['poster_status']=="close"){
+				  document.getElementById("status_gotovo").style.display = "block";
+
+				  document.getElementById("status_gotovka").style.display = "none";
+				  document.getElementById("status_obrabotka").style.display = "none";
+				  document.getElementById("status_dostavka").style.display = "none";
+				}
+
           $('#myModal').modal('show')
         }         
         //цикл
