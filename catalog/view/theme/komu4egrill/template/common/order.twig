@@ -15,16 +15,13 @@
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
       <h2>Заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен</h2>
-      <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени.</h3>
-      
-      <h2>Статус вашего заказа: <span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
-
+      <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени. Статус заказа:</h3>      
+      <h2><span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
       <span id="PosterStatusOrder" style="display: none">{{PosterStatusOrder}}</span>
       <div id="status_obrabotka" style="display: none"> <img src="{{ status_obrabotka }}" title="статус" alt="статус" class="img-responsive" /></div>
       <div id="status_gotovka" style="display: none"> <img src="{{ status_gotovka }}" title="статус" alt="статус" class="img-responsive" /></div> 
       <div id="status_gotovo" style="display: none"> <img src="{{ status_gotovo }}" title="статус" alt="статус" class="img-responsive" /></div>       
       <div id="status_dostavka" style="display: none"> <img src="{{ status_dostavka }}" title="статус" alt="статус" class="img-responsive" /></div>
-
       <h3><span id="WarningText">ВНИМАНИЕ: не закрывайте эту страницу, мы здесь уведомим Вас о статусе заказа:</span></h3>
       {# <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
