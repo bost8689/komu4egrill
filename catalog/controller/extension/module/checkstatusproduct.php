@@ -145,13 +145,13 @@ class ControllerExtensionModuleCheckstatusproduct extends Controller {
                 // $this->log -> write($getOrder);
                 $message='Ваш заказ готов. КомуЧЁ GRILL';  
                 if ($getOrder['shipping_method']=='Самовывоз из заведения') {        
-                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." готов. Забирайте скорее, горячее вкуснее. КомуЧё GRILL komu4egrill.ru";
+                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." готов. Забирайте скорее, горячее вкуснее. komu4egrill.ru";
                 }
                 elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 1000 руб.'){
-                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. КомуЧё GRILL komu4egrill.ru ";             
+                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. komu4egrill.ru";             
                 }
                 elseif($getOrder['shipping_method']=='Бесплатная доставка'){
-                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. КомуЧё GRILL komu4egrill.ru"; 
+                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. komu4egrill.ru"; 
                 }            
                 $this->model_extension_module_checkstatusproduct->setStatusOrder(['poster_status_order'=>'ready','id'=>$vStatusOrder['id']]);
                 //$SMSC_API = $this->load->controller('Extension/Module/SMSC_API',['phones'=>$getOrder['telephone'],'message'=>$message]);
