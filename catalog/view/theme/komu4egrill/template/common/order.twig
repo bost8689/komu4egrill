@@ -14,8 +14,10 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h2 class="sucess">Заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен</h2>
-      <h3>Здесь отображается и обновляется актуальный статус вашего заказа в реальном времени. Статус заказа:</h3>      
+
+      
+      <h3 class="sucess">Перезванивать Вам, для еще одного подтверждения заказа не будут, чтобы не тревожить Вас. </h3> <h2 class="sucess">ваш заказ №<span id="order_id">{{order_id}}</span> {# {{ heading_title }} #} успешно оформлен и подтверждён</h2><h3 class="sucess"> Статус заказа обновится на сайте автоматически, как его начнут готовить. Как он будет готов, мы сообщим на этой странице и дополнительно отправим смс.</h3> 
+      <h3>Статус заказа:</h3>      
       <h2 class="sucess"><span id="PosterStatusOrderText">{{PosterStatusOrderText}}</span></h2>
       <span id="PosterStatusOrder" style="display: none">{{PosterStatusOrder}}</span>
       <div id="status_obrabotka" style="display: none"> <img src="{{ status_obrabotka }}" title="статус" alt="статус" class="img-responsive" /></div>
