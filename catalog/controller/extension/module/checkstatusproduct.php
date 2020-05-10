@@ -145,7 +145,7 @@ class ControllerExtensionModuleCheckstatusproduct extends Controller {
                 // $this->log -> write($getOrder);
                 $message='Ваш заказ готов. КомуЧЁ GRILL';  
                 if ($getOrder['shipping_method']=='Самовывоз из заведения') {        
-                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." готов. Забирайте скорее, горячее вкуснее. komu4egrill.ru";
+                    $message="Ваш заказ #".$vStatusOrder['im_order_id']." готов. Горячее вкуснее. komu4egrill.ru";
                 }
                 elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 1000 руб.'){
                     $message="Ваш заказ #".$vStatusOrder['im_order_id']." отправлен курьером. Ожидайте доставки. komu4egrill.ru";             
