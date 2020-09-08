@@ -81,17 +81,12 @@ class ControllerCheckoutSuccess extends Controller {
 			      if ($getOrder['shipping_method']=='Самовывоз из заведения') {        
 			          $getOrder['shipping_method']='Самовывоз';
 			      }
-			      elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 1000 руб.'){
+			      elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 600 руб.'){
 			              $getOrder['shipping_method']=''; 
 			              //добавляю доставку платную
 			              $products_for_order[] = ['product_id'=>93,'count'=>1];   
 			      }
 			      elseif($getOrder['shipping_method']=='Бесплатная доставка'){
-			      				//доставка бесплатная
-			              $getOrder['shipping_method']=''; 
-			              $products_for_order[] = ['product_id'=>94,'count'=>1];
-			      }
-			      elseif($getOrder['shipping_method']=='Доставка от суммы заказа до 1000 руб.'){
 			      				//доставка бесплатная
 			              $getOrder['shipping_method']=''; 
 			              $products_for_order[] = ['product_id'=>94,'count'=>1];
