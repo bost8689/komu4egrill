@@ -1,20 +1,18 @@
 {{ header }}
 <script>
 
+
 window.onscroll = function() {myFunction()};
-
 var container_menu = document.getElementById("container_menu");
-
-
 var navbar = document.getElementById("menu");
 var cart = document.getElementById("cart");
 //alert(navbar);
 //var sticky = navbar.offsetTop;
-console.log(cart);
+//console.log(cart);
 
   sticky = navbar.offsetTop;
   stickyCart = cart.offsetTop;
-  console.log(sticky + 'px sticky');
+  //console.log(sticky + 'px sticky');
   
 
 window.addEventListener('scroll', function() {
@@ -52,9 +50,9 @@ function myFunction() {  //alert(navbar);
       container_menu.classList.remove("navbar-fixed-top");
       cart.classList.remove("navbar-fixed-bottom");
       countfixed = countfixed - 1;
-      console.log('3countfixed = ' + countfixed);
-      console.log('3sticky ' + sticky);
-      console.log('3pageYOffset ' + pageYOffset);
+      // console.log('3countfixed = ' + countfixed);
+      // console.log('3sticky ' + sticky);
+      // console.log('3pageYOffset ' + pageYOffset);
     }    
   }
 };
@@ -68,7 +66,48 @@ function myFunction() {  //alert(navbar);
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}{{ content_bottom }}</div>
+    <div id="content" class="{{ class }}">{{ content_top }}{{ content_bottom }}
+
+    	<!-- Modal -->
+    	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><span style=color:red>Внимание:</span></h4>
+            </div>
+            <div class="modal-body" id="myModalBody">
+            	<span style=color:black;font-weight:400>Здравствуйте, в это время наше заведения не работает и поэтому ваш заказ мы не сможем обработать. <br><br> Ждём Вас с ПН-ВС с 10:30 - 20:00</span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Хорошо</button>
+            </div>
+          </div>
+        </div>
+     	</div>
+     	<!-- Modal -->
+
+
+    </div>
     {{ column_right }}</div>
 </div>
 {{ footer }}
+
+<script>
+var dateObj = new Date();
+var hour = dateObj.getHours();
+var minute = dateObj.getMinutes();
+//alert([hour,minute]);
+// if(hour >= 11 ){
+// 	alert("условия верны");
+// 	}
+if(hour < 10 || hour > 20){
+	//alert("условия верны");	
+	// document.getElementById('myModalLabel').innerHTML = "<span style=color:red>Внимание:</span>";
+    //document.getElementById('myModalBody').innerHTML = "<span style=color:black;font-weight:100>Повторное нажатие на кнопку Закрыть, закроет страницу со статусом заказа и мы не сможем сообщить Вам, когда он будет готов.</span>";
+        //console.log(response['status']);
+    $('#myModal').modal('show')
+}
+// console.log("test");
+// console.log(hour);
+</script>
