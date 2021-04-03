@@ -2,7 +2,7 @@
 //require_once("../vendor/autoload.php");
 require_once(DIR_MAIN . 'vendor/autoload.php');
 use Viber\Client;
-class ControllerExtensionModuleViberbot extends Controller {
+class ControllerExtensionModuleVibersetup extends Controller {
 	public function index() {
 		
 		$apiKey = VIBER_TOKEN; // <- PLACE-YOU-API-KEY-HERE
